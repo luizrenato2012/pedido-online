@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<head>
+  <title>Catálogo de Produtos</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/javascript.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+
+<body>
+
+
+
+<div class="container">
+<div align="center"> <font size=5 color="green"> Vidraçaria Tia Gusta </font> </div>
+
+   <div class="table-wrapper-scroll-y">
+        <div class="list-group">
+        	<a href="#" class="list-group-item"  data-toggle="modal" data-target="#myModal" >  
+		    <table >
+   		      <tbody>
+      			<tr>
+        		   <td rowspan="3"><img src="img/vidro.jpeg" alt="some text" width=50 height=40></td>
+		           <td> <font size = 2 > Produto 1 </font> </td>
+      			</tr>
+    			<tr><td> <font size = 1 > Breve descrição sobre o produto 1 </font> </td></tr>
+     			<tr><td> <font size = 1 color = "red" >  R$ 100.00  </font> </td></tr>      
+                     </tbody>
+                  </table>    
+               </a>
+   	       <a href="#" class="list-group-item"  data-toggle="modal" data-target="#myModal" >   
+    	  <table >
+                     <tbody>
+                       <tr>
+                         <td rowspan="3"><img src="img/vidro2.jpeg" alt="some text" width=50 height=40></td>
+	                 <td> <font size = 2 > Produto2 </font> </td>
+                       </tr>
+                       <tr><td> <font size = 1 > Breve descrição sobre o produto 2 </font> </td></tr>
+                       <tr><td> <font size = 1 color = "red" >  R$ 200.00  </font> </td></tr>      
+                   </tbody>
+		</table>
+	      </a>
+              <a href="#" class="list-group-item"  data-toggle="modal" data-target="#myModal" >   
+		 <table >
+  		    <tbody>
+                      <tr>
+        		 <td rowspan="3"><img src="img/vidro3.jpeg" alt="some text" width=50 height=40></td>
+			 <td> <font size = 2 > Produto 3 </font> </td>
+                      </tr>
+       		      <tr><td> <font size = 1 > Breve descrição sobre o produto 3 </font> </td></tr>
+                      <tr><td> <font size = 1 color = "red" >  R$ 300.00  </font> </td></tr>      
+   		    </tbody>
+		</table>
+              </a>
+	     <a href="#" class="list-group-item"  data-toggle="modal" data-target="#myModal" >   
+		<table >
+  		    <tbody>
+                      <tr>
+        		 <td rowspan="3"><img src="img/vidro4.jpeg" alt="some text" width=50 height=40></td>
+			 <td> <font size = 2 > Produto 4 </font> </td>
+                      </tr>
+       		      <tr><td> <font size = 1 > Breve descrição sobre o produto 4 </font> </td></tr>
+                      <tr><td> <font size = 1 color = "red" >  R$ 150.00  </font> </td></tr>      
+   		    </tbody>
+		</table>
+              </a>
+                <a href="#" class="list-group-item"  data-toggle="modal" data-target="#myModal" >   
+		 <table >
+  		    <tbody>
+                      <tr>
+        		 <td rowspan="3"><img src="img/vidro5.jpeg" alt="some text" width=50 height=40></td>
+			 <td> <font size = 2 > Produto 5 </font> </td>
+                      </tr>
+       		      <tr><td> <font size = 1 > Breve descrição sobre o produto 5 </font> </td></tr>
+                      <tr><td> <font size = 1 color = "red" >  R$ 50.00  </font> </td></tr>      
+   		    </tbody>
+		</table>
+              </a>
+	        <a href="#" class="list-group-item"  data-toggle="modal" data-target="#myModal" >   
+		 <table >
+  		    <tbody>
+                      <tr>
+        		 <td rowspan="3"><img src="img/vidro6.jpeg" alt="some text" width=50 height=40></td>
+			 <td> <font size = 2 > Produto 6 </font> </td>
+                      </tr>
+       		      <tr><td> <font size = 1 > Breve descrição sobre o produto 6 </font> </td></tr>
+                      <tr><td> <font size = 1 color = "red" >  R$ 300.00  </font> </td></tr>      
+   		    </tbody>
+		</table>
+              </a>	
+ 
+		
+       </div>
+   </div>   <!--Div do scroll -->
+
+
+     <a href="carrinho.html" class="list-group-item" >    <!--Sera outro modal -->
+		  <table bgcolor="grey">
+  		    <tbody>
+            <tr>
+        		 <td rowspan="3" id="cel1">  <font size = 2 > CARRINHO </font>  </td>			
+             <tr>
+              <td id="cel"> 
+                <font size = 2 color = "red" >  R$ 300.00  </font> 
+              </td>
+            </tr>      
+   		    </tbody>
+		  </table>
+    </a>
+
+
+
+</div>   <!--Div do containner -->
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">    
+      <!-- Modal content-->
+      <div class="modal-content" align = "center">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Detalhe</h4>
+        </div>
+        <div class="modal-body">         
+          <div class="wrap-input3 input3-select">
+          <div align = "center"> <label > produto 1 </label>  </div>
+          <img src="img/vidro.jpeg" alt="some text" width=120 height=90><br>
+          <font size = 1 > Breve descrição sobre o produto 1 </font>
+
+          <table >
+            <tbody>
+              <tr>
+                <td id="cel">  <font size = 2 color = "red" >  R$ 300.00  </font>   </td>
+                <td id="cel1"> 
+                  <div data-app="product.quantity" id="quantidade">
+                    <span id="span_erro_carrinho" class="blocoAlerta" style="display:none;">Selecione uma opção produto</span >  
+                    <input type="button" id="plus" value='-' onclick="process(-1)" />
+                    <input id="quant" name="quant" class="text" style="text-align:center" size="1" type="text" value="1" maxlength="5" />
+                    <input type="button" id="minus" value='+' onclick="process(1)">
+                  </div>  </font> 
+                </td>
+              </tr>
+              <tr>
+                <td id="cel"> 
+                  <font size = 2 color = "red" >  R$ 300.00  </font>
+                </td>       
+                <td id="cel1"> <a href="#" class="list-group-item"  data-toggle="modal" data-target="#myModal"  >
+                    <div align = "center"> <img src="img/adicionar.jpg" alt="some text" width=15 height=15 > </div> </a>
+                </td>
+              </tr>                
+            </tbody>
+          </table>  
+        </div>  
+      </div>
+    </div>
+  </div>  
+</div>   
+
+</body>
+</html>
+

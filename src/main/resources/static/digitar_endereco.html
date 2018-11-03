@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Digite seu endereço</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+  <script type="text/javascript" src="js/javascript.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+
+
+<body>
+
+<div class="container">
+  <div align="center"> <h3>Endereço</h3> </div>
+  <form action="pedido_finalizado.html">
+    
+    <div class="form-group">
+      <input type="text" class="form-control" id="rua" placeholder="Rua" name="rua" required>
+    </div>        
+    <div class="form-group">
+      <table>
+        <tr>
+          <td>
+          <input style="width:80px;" type="text" class="form-control" id="numero" placeholder="Número" name="numero" required>
+          </td>
+          <td class="tdE">
+            <input style="width:146px;" type="text" class="form-control" id="cep" placeholder="CEP" name="cep" required>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="form-group">      
+      <select class="form-control" name="bairro" id="bairro" required>
+                            <option slected value="">Bairro</option>
+                            <option value="society">Centro</option>
+                            <option value="language">Interior</option>
+                        </select> 
+                      
+    </div>
+    <div class="form-group">
+      <table>
+        <tr>
+          <td>
+           <select class="form-control" name="cidade" id="cidade" required>
+                            <option slected value="">Cidade</option>
+                            <option value="society">Benevilly Hills</option>
+                            <option value="language">Caixa Prego</option>
+           </select>        
+          </td>
+          <td class="tdE">
+            <select style="width:97px;" class="form-control" name="uf" id="uf" required>
+                            <option slected value="">UF</option>
+                            <option value="society">PA</option>
+                            <option value="language">SP</option>
+            </select>    
+          </td>  
+        </tr>   
+      </table>
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="complemento" placeholder="Complemento" name="complemento" >
+    </div> 
+    <div class="form-group">
+      <input type="text" class="form-control" id="telefone" placeholder="Telefone" name="telefone" required>
+    </div>
+    <button class="button button1 size" type="submit" >Gravar</button> 
+  </form>
+
+ </div>
+</div>
+
+</body>
+</html>
