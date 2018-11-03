@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>br.com.lrsantos</groupId>
+	<groupId>br.com.pedido</groupId>
 	<artifactId>pedido-online</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
@@ -37,6 +37,7 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
+			<version>9.4-1200-jdbc4</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
