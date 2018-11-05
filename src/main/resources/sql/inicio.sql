@@ -17,6 +17,8 @@ ALTER TABLE pedido.produto
 GRANT ALL ON TABLE pedido.produto TO "user";
 GRANT SELECT, UPDATE, INSERT ON TABLE pedido.produto TO public;
 
+insert into pedido.produto (id, codigo,nome, descricao, categoria,visivel) values
+( nextval('pedido.seq_id_produto'), 100, ' Produto 1' , 'breve descricao sobre o produto 1','sem categoria', true)
 
 insert into pedido.produto (id, codigo,nome, descricao, categoria,visivel) values
 ( nextval('pedido.seq_id_produto'), 200, ' Produto 2' , 'breve descricao sobre o produto 2','sem categoria', true)
@@ -30,3 +32,6 @@ insert into pedido.produto (id, codigo,nome, descricao, categoria,visivel) value
 
 insert into pedido.produto (id, codigo,nome, descricao, categoria,visivel) values
 ( nextval('pedido.seq_id_produto'), 500, ' Produto 5' , 'breve descricao sobre o produto 5', 'sem categoria',true)
+
+insert into pedido.produto (id, codigo,nome, descricao, categoria,visivel) values
+( nextval('pedido.seq_id_produto'), 600, ' Produto 6' , 'breve descricao sobre o produto 6', 'sem categoria',true)

@@ -1,16 +1,13 @@
 package br.com.pedido.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.imageio.ImageIO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -52,19 +49,35 @@ public class ProdutoResource {
 	}
 	
 	@GetMapping("/grava")
-	public ResponseEntity<Produto> gravaImagens() {
-		String PATH="C:\\Users\\luiz\\git\\pedido-online\\src\\main\\resources\\static\\img";
+	public ResponseEntity<List<Produto>> gravaImagens() {
+		String PATH="/home/teste-user/git/pedido-online/src/main/resources/static/img";
+		List<Produto> produtos = new ArrayList<>();
 //		List<String> arquivos = Arrays.asList("vidro","vidro2","vidro3","vidro4","vidro5");
-		Path path = Paths.get(PATH+"\\" + "vidro5.jpeg");
-		try {
-			byte[] bytes = Files.readAllBytes(path);
-			Produto p = this.service.findOne(10);
-			p.setImagem(bytes);
-			this.service.save(p);
-			return ResponseEntity.ok(p);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+//		List<Integer> ids = Arrays.asList(5, 6, 7, 8, 9 );
+		Map<Integer, String> map = new HashMap<>();
+		map.put(5, "vidro");
+		map.put(6, "vidro2");
+		map.put(7, "vidro3");
+		map.put(8, "vidro4");
+		map.put(9, "vidro5");
+		map.put(10, "vidro6");
+		
+		map.keySet().forEach( id -> {
+			try {
+				Path path = Paths.get(PATH+"/" + map.get(id)   + ".jpeg");
+				byte[] bytes = Files.readAllBytes(path);
+				
+				Produto produto = this.service.findOne(id);
+				produto.setImagem(bytes);
+				this.service.save(produto);
+				
+				produtos.add(produto);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		});
+			
+		return ResponseEntity.ok(produtos);
 	}
 
 }
