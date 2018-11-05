@@ -1,9 +1,16 @@
 package br.com.pedido.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
+
+import javax.imageio.ImageIO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,10 +45,26 @@ public class ProdutoResource {
 		return ResponseEntity.ok(produto);
 	}
 	
-	@GetMapping("/")
+	@GetMapping
 	public ResponseEntity<List<Produto>> listaTodos() {
 		List<Produto> produtos = this.service.findAll();
 		return ResponseEntity.ok(produtos);
+	}
+	
+	@GetMapping("/grava")
+	public ResponseEntity<Produto> gravaImagens() {
+		String PATH="C:\\Users\\luiz\\git\\pedido-online\\src\\main\\resources\\static\\img";
+//		List<String> arquivos = Arrays.asList("vidro","vidro2","vidro3","vidro4","vidro5");
+		Path path = Paths.get(PATH+"\\" + "vidro5.jpeg");
+		try {
+			byte[] bytes = Files.readAllBytes(path);
+			Produto p = this.service.findOne(10);
+			p.setImagem(bytes);
+			this.service.save(p);
+			return ResponseEntity.ok(p);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 }
