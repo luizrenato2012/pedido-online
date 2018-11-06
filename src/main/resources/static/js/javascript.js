@@ -1,5 +1,5 @@
 
-  function process(quant){
+function process(quant){
     var value = parseInt(document.getElementById("quant").value);
     value+=quant;
     if(value < 1){

@@ -7,6 +7,7 @@ CREATE TABLE pedido.produto
   categoria character varying(40),
   visivel boolean,
   imagem bytea,
+  preco numeric(8,2),
   CONSTRAINT pk_produto PRIMARY KEY (id)
 )
 WITH (

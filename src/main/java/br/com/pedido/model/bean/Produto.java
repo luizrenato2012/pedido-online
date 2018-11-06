@@ -1,13 +1,12 @@
 package br.com.pedido.model.bean;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -35,6 +34,9 @@ public class Produto implements Serializable{
 	
 //	@Lob
 	private byte [] imagem;
+	
+	private BigDecimal preco;
+	
 
 	public Integer getId() {
 		return id;
@@ -90,6 +92,14 @@ public class Produto implements Serializable{
 
 	public void setImagem(byte[] imagem) {
 		this.imagem = imagem;
+	}
+	
+	public BigDecimal getPreco() {
+		return preco;
+	}
+
+	public void setPreco(BigDecimal preco) {
+		this.preco = preco;
 	}
 
 	@Override
