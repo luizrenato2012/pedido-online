@@ -6,11 +6,12 @@ class ProdutoController {
 	
 	listaProdutos() {
 		this.produtoService.listaProduto().then (
-				produtos => {
-					console.log(produtos);
-				} , error => {
-					console.error(error);
-				}
+			produtos => {
+				console.log(produtos);
+				
+			} , error => {
+				console.error(error);
+			}
 		);
 	}
 }
