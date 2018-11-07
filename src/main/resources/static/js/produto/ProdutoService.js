@@ -5,13 +5,13 @@ class ProdutoService {
 	}
 	
 	listaProduto() {
-		let urlListaProduto = "http://localhost:8080/api/produto";
-		urlListaProduto.then (
+		let urlListaProduto = "http://localhost:8080/api/produtos";
+		return this.httpHelper.get(urlListaProduto).then (
 			sucesso => {
 				return sucesso;
 			},
 			error => {
-				console.error("Erro ao listar produtos " + error);
+				throw new Error("Erro ao listar produtos " + error);
 			}
 		);
 	}

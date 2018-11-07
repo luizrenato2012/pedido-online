@@ -22,7 +22,7 @@ import br.com.pedido.model.bean.Produto;
 import br.com.pedido.model.service.ProdutoService;
 
 @RestController
-@RequestMapping("/api/produto")
+@RequestMapping("/api/produtos")
 @CrossOrigin(origins="http://localhost:8080")
 public class ProdutoResource {
 	

@@ -2,10 +2,15 @@ class ProdutoController {
 	
 	constructor() {
 		this.produtoService = new ProdutoService();
-		this.listaProdutos();
 	}
 	
 	listaProdutos() {
-				
+		this.produtoService.listaProduto().then (
+				produtos => {
+					console.log(produtos);
+				} , error => {
+					console.error(error);
+				}
+		);
 	}
 }
