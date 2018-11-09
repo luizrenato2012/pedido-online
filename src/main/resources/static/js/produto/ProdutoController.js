@@ -12,6 +12,14 @@ class ProdutoController {
 				} , error => {
 					console.error(error);
 				}
+
+			produtos => {
+				console.log(produtos);
+				
+			} , error => {
+				console.error(error);
+			}
+
 		);
 	}
 	
