@@ -19,8 +19,7 @@
 <script type="text/javascript" src="js/produto/Produto.js"></script>
 <script type="text/javascript" src="js/produto/HttpHelper.js"></script>
 <script type="text/javascript" src="js/produto/ProdutoService.js"></script>
-<script type="text/javascript" src="js/produto/ProdutoController.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
+
 
 </head>
 
@@ -69,22 +68,22 @@
 				<div class="modal-body">
 					<div class="wrap-input3 input3-select">
 						<div align="center">
-							<label> produto 1 </label>
+							<label id="lblNome"> </label>
 						</div>
-						<img src="img/vidro.jpeg" alt="some text" width=120 height=90><br>
-						<font size=1> Breve descrição sobre o produto 1 </font>
+						<img id="imgItem" src="img/vidro.jpeg" alt="some text" width=120 height=90><br>
+						<font size=1 id="lblDescricao"> </font>
 
 						<table>
 							<tbody>
 								<tr>
-									<td id="cel"><font size=2 color="red"> R$ 300.00 </font>
+									<td id="cel"><font size=2 color="red" id="lblPreco">  </font>
 									</td>
 									<td id="cel1">
 										<div data-app="product.quantity" id="quantidade">
 											<span id="span_erro_carrinho" class="blocoAlerta"
 												style="display: none;">Selecione uma opção produto</span> <input
 												type="button" id="plus" value='-' onclick="process(-1)" />
-											<input id="quant" name="quant" class="text"
+											<input id="quant" name="quant" id="quant" class="text"
 												style="text-align: center" size="1" type="text" value="1"
 												maxlength="5" /> <input type="button" id="minus" value='+'
 												onclick="process(1)">
@@ -92,13 +91,12 @@
 									</td>
 								</tr>
 								<tr>
-									<td id="cel"><font size=2 color="red"> R$ 300.00 </font>
+									<td id="cel"><font size=2 color="red" id="lblValorTotal"> </font>
 									</td>
 									<td id="cel1"><a href="#" class="list-group-item"
 										data-toggle="modal" data-target="#myModal">
 											<div align="center">
-												<img src="img/adicionar.jpg" alt="some text" width=15
-													height=15>
+												<img  src="img/adicionar.jpg" alt="sem imagem no momento" width=15 height=15>
 											</div>
 									</a></td>
 								</tr>
@@ -109,7 +107,9 @@
 			</div>
 		</div>
 	</div>
-
 </body>
+
+<script type="text/javascript" src="js/produto/ProdutoController.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
 </html>
 

@@ -6,13 +6,28 @@ class ProdutoService {
 	
 	listaProduto() {
 		let urlListaProduto = "http://localhost:8080/api/produtos";
-		return this.httpHelper.get(urlListaProduto).then (
-			sucesso => {
-				return sucesso;
-			},
-			error => {
-				throw new Error("Erro ao listar produtos " + error);
-			}
-		);
+		return new Promise ( (resolve, reject) => {
+			this.httpHelper.get(urlListaProduto).then (
+					sucesso => {
+						this.mapItens = new Map();
+						sucesso.forEach(item => this.mapItens.set(item.id, item) );
+						resolve( sucesso);
+					},
+					error => {
+						reject("Erro ao listar produtos " + error);
+					}
+				);
+			
+		});
 	}
+	
+	getItemSelecionado(id) {
+		return this.mapItens.get(id);
+	}
+	
+	getMap() {
+		return this.mapItens;
+	}
+	
+	
 }

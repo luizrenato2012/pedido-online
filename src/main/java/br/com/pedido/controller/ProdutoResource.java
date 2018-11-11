@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.pedido.model.bean.Produto;
+import br.com.pedido.model.repository.ProdutoRepository;
 import br.com.pedido.model.service.ProdutoService;
 
 @RestController
@@ -28,7 +29,10 @@ import br.com.pedido.model.service.ProdutoService;
 public class ProdutoResource {
 	
 	@Autowired
-	private ProdutoService service;
+	private ProdutoRepository produtoRepository;
+	
+//	@Autowired
+//	private ProdutoService produtoService;
 	
 	@GetMapping("/teste")
 	public ResponseEntity<Map<String,String>> teste() {
@@ -41,14 +45,13 @@ public class ProdutoResource {
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Produto> busca(@PathVariable Integer id) {
-		Produto produto = this.service.findOne(id);
+		Produto produto = this.produtoRepository.findOne(id);
 		return ResponseEntity.ok(produto);
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<Produto>> listaTodos() {
-		List<Produto> produtos = this.service.findAll(new Sort("nome"));
-		return ResponseEntity.ok(produtos);
+	public ResponseEntity<List<Produto>> listaTodos() { 
+		return ResponseEntity.ok(this.produtoRepository.findAll(new Sort("nome")));
 	}
 	
 	@GetMapping("/grava")
@@ -70,9 +73,9 @@ public class ProdutoResource {
 				Path path = Paths.get(PATH+"/" + map.get(id)   + ".jpeg");
 				byte[] bytes = Files.readAllBytes(path);
 				
-				Produto produto = this.service.findOne(id);
+				Produto produto = this.produtoRepository.findOne(id);
 				produto.setImagem(bytes);
-				this.service.save(produto);
+				this.produtoRepository.save(produto);
 				
 				produtos.add(produto);
 			} catch (IOException e) {

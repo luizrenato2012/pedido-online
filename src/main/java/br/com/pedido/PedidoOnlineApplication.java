@@ -7,7 +7,6 @@ import org.springframework.context.annotation.ComponentScan;
 import br.com.pedido.controller.ProdutoResource;
 
 @SpringBootApplication
-@ComponentScan(basePackageClasses=ProdutoResource.class)
 public class PedidoOnlineApplication {
 
 	public static void main(String[] args) {
