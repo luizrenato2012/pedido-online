@@ -44,7 +44,7 @@
 					<tr>
 						<td rowspan="3" id="cel1"><font size=2> CARRINHO </font></td>
 					<tr>
-						<td id="cel"><font size=2 color="red"> R$ 300.00 </font></td>
+						<td id="cel"><font id="txtTotalCarrinho" size=2 color="red"> R$ 0,00 </font></td>
 					</tr>
 				</tbody>
 			</table>
@@ -84,7 +84,7 @@
 												style="display: none;">Selecione uma opção produto</span> <input
 												type="button" id="plus" value='-' onclick="process(-1)" />
 											<input id="quant" name="quant" id="quant" class="text"
-												style="text-align: center" size="1" type="text" value="1"
+												style="text-align: center" size="1" type="text" value="0"
 												maxlength="5" /> <input type="button" id="minus" value='+'
 												onclick="process(1)">
 										</div> </font>
@@ -93,10 +93,9 @@
 								<tr>
 									<td id="cel"><font size=2 color="red" id="lblValorTotal"> </font>
 									</td>
-									<td id="cel1"><a href="#" class="list-group-item"
-										data-toggle="modal" data-target="#myModal">
+									<td id="cel1"><a href="#" id="btnAdiciona" class="list-group-item" data-toggle="modal" data-target="#myModal">
 											<div align="center">
-												<img  src="img/adicionar.jpg" alt="sem imagem no momento" width=15 height=15>
+												<img  src="img/adicionar.jpg" alt="sem imagem no momento" width="15" height="15">
 											</div>
 									</a></td>
 								</tr>

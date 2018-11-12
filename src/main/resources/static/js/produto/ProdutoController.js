@@ -2,6 +2,18 @@ class ProdutoController {
 	
 	constructor() {
 		this.produtoService = new ProdutoService();
+		
+		this.itensSelecionados = [];
+		this.itemSelecionado = {};
+		
+		this.precoTxt = document.querySelector("#lblPreco");
+		this.quantidadeTxt = document.querySelector("#quant");
+		this.valorItemTxt = document.querySelector("#lblValorTotal");
+		
+		this.nomeLbl = document.querySelector("#lblNome");
+		this.descricaoLbl=  document.querySelector("#lblDescricao");
+		this.imagemImg=  document.querySelector("#imgItem");
+		this.totalCarrinhoTxt = document.querySelector("#txtTotalCarrinho");
 	}
 	
 	listaProdutos() {
@@ -23,7 +35,7 @@ class ProdutoController {
 					<table>
 						<tbody>
 							<tr>
-								<td rowspan="3"><img src="data:image/png;base64, ${produto.imagem}" alt="sem imagem no momento"	width=50 height=40></td>
+								<td rowspan="3"><img src="data:image/png;base64, ${produto.imagem}" alt="sem imagem"	width=50 height=40></td>
 								<td><font size=2> ${produto.nome} </font></td>
 							</tr>
 							<tr>
@@ -43,26 +55,66 @@ class ProdutoController {
 	}
 	
 	preencheSelecao (id) {
-		let itemSelecionado = this.produtoService.getItemSelecionado(id);
-		console.log('preenche Selecao ' + id);
-		document.querySelector("#lblNome").innerHTML=itemSelecionado.nome;
-		document.querySelector("#lblDescricao").innerText=itemSelecionado.descricao;
-		document.querySelector("#lblPreco").innerText= 'R$ ' + parseFloat(itemSelecionado.preco);
-		document.querySelector("#imgItem").src="data:image/png;base64, "+ itemSelecionado.imagem;
-		let quant = document.querySelector("#quant").value;
-		document.querySelector("#lblValorTotal").innerText= 'R$ ' + parseFloat(itemSelecionado.preco);
+		this.itemSelecionado = this.produtoService.getItemSelecionado(id);
+		//console.log('preenche Selecao ' + id);
+		this.nomeLbl.innerHTML=this.itemSelecionado.nome;
+		this.descricaoLbl.innerText=this.itemSelecionado.descricao;
+		this.precoTxt.innerText= 'R$ ' + parseFloat(this.itemSelecionado.preco);
+		this.imagemImg.src="data:image/png;base64, "+ this.itemSelecionado.imagem;
+		
+		let quant = this.quantidadeTxt.value;
+		this.itemSelecionado.quantidade = parseFloat(this.quantidadeTxt.value);
+		
+		this.itemSelecionado.valorTotal = this.itemSelecionado.preco * this.itemSelecionado.quantidade;
+		this.valorItemTxt.innerText= 'R$ ' + this.itemSelecionado.valorTotal;
 	}
 	
-	/*initLinks() {
-		let links = document.querySelectorAll("a.comando");
+	calculaItem() {
+		let quantidade = parseFloat(this.quantidadeTxt.value);
+		console.log('alterada quantidade '+ quantidade);
+		if (quantidade==0) {
+			this.valorItemTxt.innerText="R$ 0,0";
+			return;
+		}
 		
-		console.log('total de itens '+ links.length);
+		let preco = parseFloat(this.precoTxt.innerText.substring(3));
 		
-		links.forEach ( link => {
-			console.log('iniciando links');
-			link.addEventListener('click', () => {
-				console.log('>>> Link clicado!!!');
-			});
-		});
-	}*/
+	//	console.log(`preco ${preco} - quant. ${quantidade}`);
+		
+		let total = (preco * quantidade);
+		this.itemSelecionado.valorTotal = total;
+	//	console.log(`total ${total}`); 
+		
+		this.valorItemTxt.innerText ="R$ " +(total.toFixed(2))+"";
+	}
+	
+	adicionaItem() {
+		console.log(`adiciona item ${this.itemSelecionado.id} - total ${this.itemSelecionado.valorTotal}`);
+		if (this.itensSelecionados.includes (this.itemSelecionado)) {
+			let index = this.itensSelecionados.indexOf(this.itemSelecionado);
+			let item = this.itensSelecionados[index];
+			item.valorTotal = this.itemSelecionado.valorTotal;
+//			this.itensSelecionados.push(this.itemSelecionado);
+		} else {
+			this.itensSelecionados.push(this.itemSelecionado);
+		}
+		this.totalizaProdutos();
+		//this.itensSelecionados
+	}
+	
+	totalizaProdutos() {
+//		let total = this.itensSelecionados.reduce( (inicio, item) => {
+//			return inicio +item.valorTotal;
+//		}, 0);
+		let total=0;
+		let item = {};
+		for(let i = 0 ; i < this.itensSelecionados.length; i++) {
+			item=this.itensSelecionados[i];
+			console.log(`>>> item: ${item.id} - valor: ${item.valorTotal}`);
+			total+= item.valorTotal;
+		}
+		console.log(`>>> total do carrinhos ${total}`);
+		this.totalCarrinhoTxt.innerHTML= "R$ " + total.toFixed(2) ;
+	}
+	
 }
