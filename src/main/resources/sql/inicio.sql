@@ -36,3 +36,24 @@ insert into pedido.produto (id, codigo,nome, descricao, categoria,visivel) value
 
 insert into pedido.produto (id, codigo,nome, descricao, categoria,visivel) values
 ( nextval('pedido.seq_id_produto'), 600, ' Produto 6' , 'breve descricao sobre o produto 6', 'sem categoria',true)
+
+
+CREATE TABLE pedido.pedido
+(
+    id integer NOT NULL,
+    numero integer,
+    data_hora timestamp without time zone[],
+    valor numeric(8,2),
+    CONSTRAINT pedido_pkey PRIMARY KEY (id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE pedido.pedido
+    OWNER to admin;
+
+GRANT ALL ON TABLE pedido.pedido TO admin;
+
+GRANT ALL ON TABLE pedido.pedido TO "user";
