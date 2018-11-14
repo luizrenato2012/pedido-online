@@ -84,3 +84,20 @@ ALTER TABLE pedido.seq_id_pedido
   OWNER TO "user";
 GRANT ALL ON TABLE pedido.seq_id_pedido TO "user";
 GRANT ALL ON TABLE pedido.seq_id_pedido TO public;
+
+CREATE TABLE pedido.item_pedido
+(
+  id integer NOT NULL,
+  id_produto integer,
+  numero integer,
+  valor_unitario numeric(8,2),
+  quantidade integer,
+  valor_total numeric(8,2),
+  id_pedido integer
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE pedido.item_pedido
+  OWNER TO "user";
+
