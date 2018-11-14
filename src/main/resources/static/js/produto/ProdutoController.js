@@ -113,8 +113,16 @@ class ProdutoController {
 			console.log(`>>> item: ${item.id} - valor: ${item.valorTotal}`);
 			total+= item.valorTotal;
 		}
-		console.log(`>>> total do carrinhos ${total}`);
-		this.totalCarrinhoTxt.innerHTML= "R$ " + total.toFixed(2) ;
+		this.produtoService.gravaItem(item).then (
+				itemNovo => {
+					item.valorTotal = itemNovo.valorTotal;
+					console.log(`>>> total do carrinhos ${total}`);
+					this.totalCarrinhoTxt.innerHTML= "R$ " + total.toFixed(2) ;
+				} , error => {
+					console.error(error);
+				}
+		);
+		
 	}
 	
 }

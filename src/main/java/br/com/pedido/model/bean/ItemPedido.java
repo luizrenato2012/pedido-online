@@ -36,7 +36,7 @@ public class ItemPedido {
 	private Produto produto;
 	
 	@ManyToOne(targetEntity=Pedido.class)
-	@JoinColumn(name="id_pedido'")
+	@JoinColumn(name="id_pedido")
 	private Pedido pedido;
 	
 	public Integer getId() {

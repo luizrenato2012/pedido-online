@@ -21,6 +21,13 @@ class ProdutoService {
 		});
 	}
 	
+	gravaItem(item) {
+		let urlGrava = "http://localhost:8080/api/itens";
+		return new Promise( (resolve, reject) => {
+			
+		});
+	}
+	
 	getItemSelecionado(id) {
 		return this.mapItens.get(id);
 	}

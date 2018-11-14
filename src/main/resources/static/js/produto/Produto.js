@@ -13,7 +13,7 @@ class Produto {
 		return this.nome;
 	}
 	
-	get descricao() {
+	get descricao() { 
 		return this.descricao;
 	}
 	
@@ -23,5 +23,14 @@ class Produto {
 	
 	get imagem() {
 		return this.imagem;
+	}
+	
+	getItemVO() {
+		return  {
+			id : this.id,
+			valorUnitario : this.preco,
+			quantidade: this.quantidade,
+			valorTotal : this.valorTotal;
+		};
 	}
 }
