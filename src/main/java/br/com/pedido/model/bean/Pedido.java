@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -32,7 +33,8 @@ public class Pedido {
 	@Column(name="valor_total")
 	private BigDecimal valorTotal;
 	
-	@OneToMany(mappedBy="pedido", cascade= {CascadeType.PERSIST,CascadeType.REMOVE})
+	@OneToMany( cascade= {CascadeType.PERSIST,CascadeType.REMOVE})
+	@JoinColumn(name="id_pedido")
 	private List<ItemPedido> itens;
 
 	public Integer getId() {
