@@ -42,7 +42,7 @@ CREATE TABLE pedido.pedido
 (
     id integer NOT NULL,
     numero integer,
-    data_hora timestamp without time zone[],
+    data_hora timestamp without time zone,
     valor numeric(8,2),
     CONSTRAINT pedido_pkey PRIMARY KEY (id)
 )
@@ -57,3 +57,30 @@ ALTER TABLE pedido.pedido
 GRANT ALL ON TABLE pedido.pedido TO admin;
 
 GRANT ALL ON TABLE pedido.pedido TO "user";
+
+
+CREATE SEQUENCE pedido.seq_id_item_pedido
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE pedido.seq_id_item_pedido
+  OWNER TO "user";
+GRANT ALL ON TABLE pedido.seq_id_item_pedido TO "user";
+GRANT ALL ON TABLE pedido.seq_id_item_pedido TO public;
+
+-- Sequence: pedido.seq_id_pedido
+
+-- DROP SEQUENCE pedido.seq_id_pedido;
+
+CREATE SEQUENCE pedido.seq_id_pedido
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE pedido.seq_id_pedido
+  OWNER TO "user";
+GRANT ALL ON TABLE pedido.seq_id_pedido TO "user";
+GRANT ALL ON TABLE pedido.seq_id_pedido TO public;
