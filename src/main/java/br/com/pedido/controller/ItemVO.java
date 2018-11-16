@@ -7,6 +7,19 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 public class ItemVO {
 	
+	public ItemVO() {
+		super();
+	}
+	
+	public ItemVO(int id, BigDecimal valorUnitario, int quantidade, BigDecimal valorTotal) {
+		super();
+		this.id = id;
+		this.valorUnitario = valorUnitario;
+		this.quantidade = quantidade;
+		this.valorTotal = valorTotal;
+	}
+	
+	
 	private int id;
 	@JsonInclude(content=Include.NON_NULL)
 	private int idPedido;
@@ -17,14 +30,6 @@ public class ItemVO {
 	
 	private BigDecimal valorTotal;
 	
-	public ItemVO(int id, BigDecimal valorUnitario, int quantidade, BigDecimal valorTotal) {
-		super();
-		this.id = id;
-		this.valorUnitario = valorUnitario;
-		this.quantidade = quantidade;
-		this.valorTotal = valorTotal;
-	}
-
 	public int getId() {
 		return id;
 	}

@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.pedido.model.bean.ItemPedido;
 import br.com.pedido.model.bean.Produto;
-import br.com.pedido.model.repository.ItemPedidoRepository;
 import br.com.pedido.model.repository.PedidoRepository;
 import br.com.pedido.model.repository.ProdutoRepository;
+import br.com.pedido.model.service.ItemPedidoService;
 
 @RestController
 @RequestMapping("/api/itens")
@@ -29,7 +29,7 @@ public class ItemPedidoResource {
 	private ProdutoRepository produtoReposiory;
 	
 	@Autowired
-	private ItemPedidoRepository itemRepository;
+	private ItemPedidoService itemService;
 	
 	@Autowired
 	private PedidoRepository pedidoRepository;
@@ -59,7 +59,7 @@ public class ItemPedidoResource {
 		item.setQuantidade(1);
 		item.setValorUnitario(produto.getPreco());
 		item.setValorTotal(  item.getValorUnitario().multiply(BigDecimal.valueOf(item.getQuantidade())));
-		this.itemRepository.save(item);
+		this.itemService.save(item);
 		
 		//pedido.setItens(new ArrayList<>());
 		//pedido.getItens().add(item);
@@ -70,22 +70,23 @@ public class ItemPedidoResource {
 	
 	@PostMapping
 	//DESCONSIDERANDO O ID DO ITEM (DEVE-SE CHEGAR E TRATAR NA VIEW P/ SEPARAR ID DO ITEM E DO PRODUTO
-	public ResponseEntity<ItemVO> adiciona( @RequestBody ItemVO itemVO) {
-		ItemPedido item = this.itemRepository.findOne(itemVO.getId());
-		HttpStatus status = null;
-		if (item ==null) { // TODO DEVE CRIAR um PEDIDO NOVO
-			item = new ItemPedido();
-			status = HttpStatus.CREATED;
-		}
-		status = HttpStatus.ACCEPTED;
-		// item.setIdPedido() TODO DEVE CRIAR UM PEDIDO NOVO NO CASO DE NAO HAVER PEDIDO
-		//			item.setNumero(numero); TODO receber do item da View
-		item.setQuantidade(itemVO.getQuantidade());
-		item.setValorUnitario(itemVO.getValorUnitario());
-		item.setValorTotal(itemVO.getValorTotal());
-		
-		this.itemRepository.save(item);
-		
-		return new ResponseEntity(item, status);
+	public ResponseEntity<BigDecimal> adicionaItens( @RequestBody List<ItemVO> itensVO) {
+//		ItemPedido item = this.itemRepository.findOne(itemVO.getId());
+//		HttpStatus status = null;
+//		if (item ==null) { // TODO DEVE CRIAR um PEDIDO NOVO
+//			item = new ItemPedido();
+//			status = HttpStatus.CREATED;
+//		}
+//		status = HttpStatus.ACCEPTED;
+//		// item.setIdPedido() TODO DEVE CRIAR UM PEDIDO NOVO NO CASO DE NAO HAVER PEDIDO
+//		//			item.setNumero(numero); TODO receber do item da View
+//		item.setQuantidade(itemVO.getQuantidade());
+//		item.setValorUnitario(itemVO.getValorUnitario());
+//		item.setValorTotal(itemVO.getValorTotal());
+//		this.listaTemp.add(item);
+//		this.itemRepository.save(item);
+		BigDecimal totalCarrinho = this.itemService.gravaItens(itensVO);
+		return new ResponseEntity(totalCarrinho, HttpStatus.ACCEPTED);
 	}
+	
 }

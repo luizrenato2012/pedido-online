@@ -3,7 +3,7 @@ class ProdutoController {
 	constructor() {
 		this.produtoService = new ProdutoService();
 		
-		this.itensSelecionados = [];
+//		this.itensSelecionados = [];
 		this.itemSelecionado = {};
 		
 		this.precoTxt = document.querySelector("#lblPreco");
@@ -80,7 +80,7 @@ class ProdutoController {
 		let preco = parseFloat(this.precoTxt.innerText.substring(3));
 		
 	//	console.log(`preco ${preco} - quant. ${quantidade}`);
-		
+		this.itemSelecionado.quantidade = quantidade;
 		let total = (preco * quantidade);
 		this.itemSelecionado.valorTotal = total;
 	//	console.log(`total ${total}`); 
@@ -90,39 +90,53 @@ class ProdutoController {
 	
 	adicionaItem() {
 		console.log(`adiciona item ${this.itemSelecionado.id} - total ${this.itemSelecionado.valorTotal}`);
-		if (this.itensSelecionados.includes (this.itemSelecionado)) {
-			let index = this.itensSelecionados.indexOf(this.itemSelecionado);
-			let item = this.itensSelecionados[index];
-			item.valorTotal = this.itemSelecionado.valorTotal;
+//		if (this.itensSelecionados.includes (this.itemSelecionado)) {
+//			let index = this.itensSelecionados.indexOf(this.itemSelecionado);
+//			let item = this.itensSelecionados[index];
+//			item.valorTotal = this.itemSelecionado.valorTotal;
+////			this.itensSelecionados.push(this.itemSelecionado);
+//		} else {
 //			this.itensSelecionados.push(this.itemSelecionado);
-		} else {
-			this.itensSelecionados.push(this.itemSelecionado);
-		}
-		this.totalizaProdutos();
+//		}
+		this.produtoService.gravaItens().then(
+			resultado => {
+				this.preencheValorTotalCarrinho(resultado.valorTotal);
+			},
+			erro => {
+				alert(erro);
+			}
+		);
+		
+//		this.totalizaProdutos();
 		//this.itensSelecionados
 	}
 	
-	totalizaProdutos() {
+	preencheValorTotalCarrinho(valor) {
+		console.log(`>>> total do carrinhos ${total}`);
+		this.totalCarrinhoTxt.innerHTML= "R$ " + total.toFixed(2) ;
+	}
+//	totalizaProdutos() {
 //		let total = this.itensSelecionados.reduce( (inicio, item) => {
 //			return inicio +item.valorTotal;
 //		}, 0);
-		let total=0;
-		let item = {};
-		for(let i = 0 ; i < this.itensSelecionados.length; i++) {
-			item=this.itensSelecionados[i];
-			console.log(`>>> item: ${item.id} - valor: ${item.valorTotal}`);
-			total+= item.valorTotal;
-		}
-		this.produtoService.gravaItem(item).then (
-				itemNovo => {
-					item.valorTotal = itemNovo.valorTotal;
-					console.log(`>>> total do carrinhos ${total}`);
-					this.totalCarrinhoTxt.innerHTML= "R$ " + total.toFixed(2) ;
-				} , error => {
-					console.error(error);
-				}
-		);
 		
-	}
+//		let alterados = this.produtoService.getItensAlterados();
+//		let total=0;
+//		let item = {};
+//		for(let i = 0 ; i < alterados.length; i++) {
+//			item=this.itensSelecionados[i];
+//			console.log(`>>> item: ${item.id} - valor: ${item.valorTotal}`);
+//			total+= item.valorTotal;
+//		}
+//		this.produtoService.gravaItem(item).then (
+//				itemNovo => {
+//					item.valorTotal = itemNovo.valorTotal;
+//					console.log(`>>> total do carrinhos ${total}`);
+//					this.totalCarrinhoTxt.innerHTML= "R$ " + total.toFixed(2) ;
+//				} , error => {
+//					console.error(error);
+//				}
+//		);
+//	}
 	
 }

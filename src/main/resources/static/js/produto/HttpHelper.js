@@ -1,7 +1,7 @@
 class HttpHelper {
 
 	
-	get( url ) {
+	get(url) {
 		return new Promise ( (resolve, reject) => {
 			const OK = 200;
 			const DONE = 4;
@@ -14,7 +14,7 @@ class HttpHelper {
 						resolve(JSON.parse(xhr.responseText));
 					} else {
 						console.log('xhr status:  '+ xhr.readyState );
-						reject(xhr.responseText);
+						reject({status :xhr.status, error : xhr.responseText});
 					}
 				} 
 			}
@@ -23,25 +23,25 @@ class HttpHelper {
 	}
 	
 	post(url, objeto) {
-		return new Promise(
-			const OK = 200;
+		return new Promise( (resolve, reject) => {
+			//200, CREATED = 201, ACCEPTED = 202 
+			const STATUS_OK = [200, 201, 202];
 			const DONE = 4;
 			const xhr = new XMLHttpRequest();
-			xhr.open('POST', '/json-handler');
+			xhr.open('POST', url);
 			xhr.setRequestHeader("Content-Type", "application/json");
 			xhr.onreadystatechange = () => { 
 				if (xhr.readyState == DONE ) {
-					if(xhr.status == OK) {
+					if(STATUS_OK.includes(xhr.status)) {
 						resolve(JSON.parse(xhr.responseText));
 					}
 				} else {
 					console.log('xhr status:  '+ xhr.readyState );
-					reject(xhr.responseText);
+					reject({status : xhr.status, error: xhr.responseText});
 				}
 			};
-			
 			xhr.send(JSON.stringify(objeto));
-		);
+		});
 	}
 	
 	

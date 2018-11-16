@@ -1,7 +1,7 @@
 class Produto {
 	
 	constructor (id, nome, descricao, preco, imagem) {
-		Object.assign( this, {id, nome, descricao, preco, imagem })
+		Object.assign( this, {id, nome, descricao, preco, imagem });
 	}
 	
 	// metodos get permite usar objeto.nome p/ obter valor ms evitar objeto.nome=valor
@@ -30,7 +30,7 @@ class Produto {
 			id : this.id,
 			valorUnitario : this.preco,
 			quantidade: this.quantidade,
-			valorTotal : this.valorTotal;
+			valorTotal : this.valorTotal
 		};
 	}
 }
