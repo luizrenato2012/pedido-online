@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.pedido.controller.ItemVO;
+import br.com.pedido.controller.ProdutoVOTeste;
 import br.com.pedido.model.bean.ItemPedido;
 import br.com.pedido.model.repository.ItemPedidoRepository;
 import br.com.pedido.model.repository.ProdutoRepository;
@@ -69,5 +70,9 @@ public class ItemPedidoService {
 	
 	public ItemPedido save(ItemPedido item) {
 		return this.itemRepository.save(item);
+	}
+	
+	public List<ProdutoVOTeste> listaItensIniciais() {
+		return this.itemRepository.listaInicio();
 	}
 }
