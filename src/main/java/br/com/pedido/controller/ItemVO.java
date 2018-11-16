@@ -28,7 +28,14 @@ public class ItemVO {
 	
 	private int quantidade;
 	
+	@JsonInclude(content=Include.NON_NULL)
 	private BigDecimal valorTotal;
+	
+	@JsonInclude(content=Include.NON_NULL)
+	private Integer idProduto;
+	
+	@JsonInclude(content=Include.NON_NULL)
+	private Integer numero;
 	
 	public int getId() {
 		return id;

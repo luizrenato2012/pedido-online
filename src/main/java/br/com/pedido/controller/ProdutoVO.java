@@ -4,14 +4,14 @@ import java.math.BigDecimal;
 
 public interface ProdutoVO {
 	
-	public int getIdItem();
-	public int getNumero();
-	public int getIdProduto();
+	public Integer getIdItem();
+	public Integer getNumero();
+	public Integer getIdProduto();
 	public String getNome();
 	public String getDescricao();
 	public byte[] getImagem();
 	public BigDecimal getValorUnitario();
-	public int getQuantidade();
+	public Integer getQuantidade();
 	public BigDecimal getValorTotal();
 
 }

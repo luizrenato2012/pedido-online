@@ -23,27 +23,14 @@ class ItemPedidoService {
 		});
 	}
 	
-//	listaProduto() {
-//		let urlListaProduto = "http://localhost:8080/api/produtos";
-//		return new Promise ( (resolve, reject) => {
-//			this.httpHelper.get(urlListaProduto).then (
-//					sucesso => {
-//						//this.mapItens = new Map();
-//						console.log('listaPedido ' + JSON.stringify(sucesso));
-//					     this.itens = sucesso;
-//						resolve( this.itens);
-//					},
-//					error => {
-//						reject("Erro ao listar produtos " + error);
-//					}
-//				);
-//			
-//		});
-//	}
-	
 	gravaItens() {
 		let urlGrava = "http://localhost:8080/api/itens";
 		let produtos = this.getItensAlterados();
+		if (produtos===undefined || produtos.length==0) {
+			return new Promisse( (resolve, reject) => {
+				reject("Lista vazia");
+			});
+		}
 		return new Promise( (resolve, reject) => {
 			this.httpHelper.post(urlGrava, produtos).then(
 					sucesso => {
@@ -66,8 +53,10 @@ class ItemPedidoService {
 		let alterados = this.itens.filter(item => ( item.valorTotal != undefined && item.valorTotal != 0 )); 
 		let retorno = alterados.map( function (item) { 
 			return { 
-				id: item.id, 
-				valorUnitario: item.preco, 
+				id: item.idItem,
+				idProduto : item.idProduto,
+				numero: item.numero,
+				valorUnitario: item.valorUnitario, 
 				quantidade: item.quantidade, 
 				valorTotal: item.valorTotal
 			}  

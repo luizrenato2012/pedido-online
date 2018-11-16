@@ -71,20 +71,6 @@ public class ItemPedidoResource {
 	@PostMapping
 	//DESCONSIDERANDO O ID DO ITEM (DEVE-SE CHEGAR E TRATAR NA VIEW P/ SEPARAR ID DO ITEM E DO PRODUTO
 	public ResponseEntity<BigDecimal> adicionaItens( @RequestBody List<ItemVO> itensVO) {
-//		ItemPedido item = this.itemRepository.findOne(itemVO.getId());
-//		HttpStatus status = null;
-//		if (item ==null) { // TODO DEVE CRIAR um PEDIDO NOVO
-//			item = new ItemPedido();
-//			status = HttpStatus.CREATED;
-//		}
-//		status = HttpStatus.ACCEPTED;
-//		// item.setIdPedido() TODO DEVE CRIAR UM PEDIDO NOVO NO CASO DE NAO HAVER PEDIDO
-//		//			item.setNumero(numero); TODO receber do item da View
-//		item.setQuantidade(itemVO.getQuantidade());
-//		item.setValorUnitario(itemVO.getValorUnitario());
-//		item.setValorTotal(itemVO.getValorTotal());
-//		this.listaTemp.add(item);
-//		this.itemRepository.save(item);
 		BigDecimal totalCarrinho = this.itemService.gravaItens(itensVO);
 		return new ResponseEntity(totalCarrinho, HttpStatus.ACCEPTED);
 	}
