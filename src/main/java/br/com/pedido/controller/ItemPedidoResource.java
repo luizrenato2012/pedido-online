@@ -43,13 +43,7 @@ public class ItemPedidoResource {
 	
 	@GetMapping("/teste")
 	public ResponseEntity<ItemPedido> teste() {
-	//	Pedido pedido = new Pedido();
-	//	pedido.setNumero(1);
-	//	pedido.setDataHora(LocalDateTime.now());
-		
 		Produto produto = this.produtoReposiory.findOne(1);
-		
-		
 		//this.pedidoRepository.save(pedido);
 		
 		ItemPedido item = new ItemPedido();
@@ -66,6 +60,10 @@ public class ItemPedidoResource {
 		//pedido.setValorTotal(item.getValorTotal());
 		//this.pedidoRepository.save(pedido);
 		return ResponseEntity.ok(item);
+	}
+	
+	public ResponseEntity<ProdutoVO> listaTodos() {
+		
 	}
 	
 	@PostMapping

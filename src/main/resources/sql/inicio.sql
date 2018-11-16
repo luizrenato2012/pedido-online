@@ -101,3 +101,17 @@ WITH (
 ALTER TABLE pedido.item_pedido
   OWNER TO "user";
 
+/**  query de lista de itens */
+select 
+	0  as id,
+	row_number() over (order by descricao) as numero,
+	p.id as idProduto,
+	p.nome,
+	p.descricao,
+	p.imagem,
+	p.preco valorUnitario,
+	case when  it.quantidade is not null then it.quantidade else 0 end as quantidade,
+	case when it.valor_total is not null then it.valor_total else 0 end as valorTotal
+from pedido.produto p
+left join pedido.item_pedido it on it.id_produto=p.id 
+order by p.descricao
