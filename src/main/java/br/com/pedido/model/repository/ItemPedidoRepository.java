@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import br.com.pedido.controller.ProdutoVO;
-import br.com.pedido.controller.ProdutoVOTeste;
+import br.com.pedido.controller.ProdutoVO;
 import br.com.pedido.model.bean.ItemPedido;
 
 @Repository
@@ -56,6 +56,6 @@ public interface ItemPedidoRepository extends JpaRepository<ItemPedido, Integer>
 				"order by p.descricao\r\n",
 				nativeQuery=true
 	)
-	public List<ProdutoVOTeste> listaInicio();
+	public List<ProdutoVO> listaInicio();
 }
 

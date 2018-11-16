@@ -28,20 +28,20 @@ class ItemPedidoController {
 	template(produtos) {
 		let content = 
 			`<div class="list-group">
-				${produtos.map ( produto => 
-					`<a href="#" class="list-group-item comando"  data-toggle="modal" data-target="#myModal" onclick="seleciona(${produto.id})">
-			<input type="hidden" name="id_item" value="${produto.id}"/>
+				${produtos.map ( item => 
+					`<a href="#" class="list-group-item comando"  data-toggle="modal" data-target="#myModal" onclick="seleciona(${item.idItem})">
+			<input type="hidden" name="id_item" value="${item.idItem}"/>
 					<table>
 						<tbody>
 							<tr>
-								<td rowspan="3"><img src="data:image/png;base64, ${produto.imagem}" alt="sem imagem"	width=50 height=40></td>
-								<td><font size=2> ${produto.nome} </font></td>
+								<td rowspan="3"><img src="data:image/png;base64, ${item.imagem}" alt="sem imagem"	width=50 height=40></td>
+								<td><font size=2> ${item.nome} </font></td>
 							</tr>
 							<tr>
-								<td><font size=1> ${produto.descricao} </font></td>
+								<td><font size=1> ${item.descricao} </font></td>
 							</tr>
 							<tr>
-								<td><font size=1 color="red"> ${produto.preco} </font></td>
+								<td><font size=1 color="red"> ${item.valorUnitario} </font></td>
 							</tr>
 						</tbody>
 					</table>
@@ -58,13 +58,13 @@ class ItemPedidoController {
 		//console.log('preenche Selecao ' + id);
 		this.nomeLbl.innerHTML=this.itemSelecionado.nome;
 		this.descricaoLbl.innerText=this.itemSelecionado.descricao;
-		this.precoTxt.innerText= 'R$ ' + parseFloat(this.itemSelecionado.preco);
+		this.precoTxt.innerText= 'R$ ' + parseFloat(this.itemSelecionado.valorUnitario);
 		this.imagemImg.src="data:image/png;base64, "+ this.itemSelecionado.imagem;
 		
 		let quant = this.quantidadeTxt.value;
 		this.itemSelecionado.quantidade = parseFloat(this.quantidadeTxt.value);
 		
-		this.itemSelecionado.valorTotal = this.itemSelecionado.preco * this.itemSelecionado.quantidade;
+		this.itemSelecionado.valorTotal = this.itemSelecionado.valorUnitario * this.itemSelecionado.quantidade;
 		this.valorItemTxt.innerText= 'R$ ' + this.itemSelecionado.valorTotal;
 	}
 	
@@ -76,11 +76,11 @@ class ItemPedidoController {
 			return;
 		}
 		
-		let preco = parseFloat(this.precoTxt.innerText.substring(3));
+		let valorUnitario = parseFloat(this.precoTxt.innerText.substring(3));
 		
 	//	console.log(`preco ${preco} - quant. ${quantidade}`);
 		this.itemSelecionado.quantidade = quantidade;
-		let total = (preco * quantidade);
+		let total = (valorUnitario * quantidade);
 		this.itemSelecionado.valorTotal = total;
 	//	console.log(`total ${total}`); 
 		

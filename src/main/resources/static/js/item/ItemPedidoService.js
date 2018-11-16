@@ -5,15 +5,15 @@ class ItemPedidoService {
 		this.itens = [];
 	}
 	
-	listaProduto() {
-		let urlListaProduto = "http://localhost:8080/api/produtos";
+	listaItens() {
+		let urlListaItens = "http://localhost:8080/api/itens/inicio";
 		return new Promise ( (resolve, reject) => {
-			this.httpHelper.get(urlListaProduto).then (
+			this.httpHelper.get(urlListaItens).then (
 					sucesso => {
 						//this.mapItens = new Map();
-						console.log('listaPedido ' + JSON.stringify(sucesso));
+					//	console.log('listaPedido ' + JSON.stringify(sucesso));
 					     this.itens = sucesso;
-						resolve( this.itens);
+						resolve(this.itens);
 					},
 					error => {
 						reject("Erro ao listar produtos " + error);
@@ -22,6 +22,24 @@ class ItemPedidoService {
 			
 		});
 	}
+	
+//	listaProduto() {
+//		let urlListaProduto = "http://localhost:8080/api/produtos";
+//		return new Promise ( (resolve, reject) => {
+//			this.httpHelper.get(urlListaProduto).then (
+//					sucesso => {
+//						//this.mapItens = new Map();
+//						console.log('listaPedido ' + JSON.stringify(sucesso));
+//					     this.itens = sucesso;
+//						resolve( this.itens);
+//					},
+//					error => {
+//						reject("Erro ao listar produtos " + error);
+//					}
+//				);
+//			
+//		});
+//	}
 	
 	gravaItens() {
 		let urlGrava = "http://localhost:8080/api/itens";
@@ -40,7 +58,7 @@ class ItemPedidoService {
 	}
 	
 	getItemSelecionado(id) {
-		return this.itens.filter( item => item.id==id)[0];
+		return this.itens.filter( item => item.idItem==id)[0];
 	}
 	
 	/** itens que tiveram suas quantidade e valor total alterados*/
