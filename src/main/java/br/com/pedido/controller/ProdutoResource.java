@@ -31,9 +31,6 @@ public class ProdutoResource {
 	@Autowired
 	private ProdutoRepository produtoRepository;
 	
-//	@Autowired
-//	private ProdutoService produtoService;
-	
 	@GetMapping("/teste")
 	public ResponseEntity<Map<String,String>> teste() {
 		System.out.println(">>>teste");

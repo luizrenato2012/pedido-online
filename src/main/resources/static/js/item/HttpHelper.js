@@ -34,11 +34,11 @@ class HttpHelper {
 				if (xhr.readyState == DONE ) {
 					if(STATUS_OK.includes(xhr.status)) {
 						resolve(JSON.parse(xhr.responseText));
+					} else {
+						console.log('xhr status:  '+ xhr.readyState );
+						reject({status : xhr.status, error: xhr.responseText});
 					}
-				} else {
-					console.log('xhr status:  '+ xhr.readyState );
-					reject({status : xhr.status, error: xhr.responseText});
-				}
+				} 
 			};
 			xhr.send(JSON.stringify(objeto));
 		});

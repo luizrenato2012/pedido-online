@@ -1,4 +1,4 @@
-class ProdutoService {
+class ItemPedidoService {
 	
 	constructor() {
 		this.httpHelper = new HttpHelper();
@@ -11,7 +11,7 @@ class ProdutoService {
 			this.httpHelper.get(urlListaProduto).then (
 					sucesso => {
 						//this.mapItens = new Map();
-						//sucesso.forEach(item => this.mapItens.set(item.id, item) );
+						console.log('listaPedido ' + JSON.stringify(sucesso));
 					     this.itens = sucesso;
 						resolve( this.itens);
 					},
@@ -30,7 +30,7 @@ class ProdutoService {
 			this.httpHelper.post(urlGrava, produtos).then(
 					sucesso => {
 						console.log('resultado graItens: ' + sucesso);
-						resolve(resultado);
+						resolve(sucesso);
 					},
 					erro => {
 						reject("Erro ao gravar itens:\n" + erro.status + " - " + erro.error);

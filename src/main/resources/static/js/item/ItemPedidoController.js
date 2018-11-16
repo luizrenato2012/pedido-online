@@ -1,9 +1,8 @@
-class ProdutoController {
+class ItemPedidoController {
 	
 	constructor() {
-		this.produtoService = new ProdutoService();
+		this.itemPedidoService = new ItemPedidoService();
 		
-//		this.itensSelecionados = [];
 		this.itemSelecionado = {};
 		
 		this.precoTxt = document.querySelector("#lblPreco");
@@ -17,7 +16,7 @@ class ProdutoController {
 	}
 	
 	listaProdutos() {
-		this.produtoService.listaProduto().then (
+		this.itemPedidoService.listaProduto().then (
 				produtos => {
 					this.template(produtos);
 				} , error => {
@@ -55,7 +54,7 @@ class ProdutoController {
 	}
 	
 	preencheSelecao (id) {
-		this.itemSelecionado = this.produtoService.getItemSelecionado(id);
+		this.itemSelecionado = this.itemPedidoService.getItemSelecionado(id);
 		//console.log('preenche Selecao ' + id);
 		this.nomeLbl.innerHTML=this.itemSelecionado.nome;
 		this.descricaoLbl.innerText=this.itemSelecionado.descricao;
@@ -71,7 +70,7 @@ class ProdutoController {
 	
 	calculaItem() {
 		let quantidade = parseFloat(this.quantidadeTxt.value);
-		console.log('alterada quantidade '+ quantidade);
+//		console.log('alterada quantidade '+ quantidade);
 		if (quantidade==0) {
 			this.valorItemTxt.innerText="R$ 0,0";
 			return;
@@ -90,53 +89,19 @@ class ProdutoController {
 	
 	adicionaItem() {
 		console.log(`adiciona item ${this.itemSelecionado.id} - total ${this.itemSelecionado.valorTotal}`);
-//		if (this.itensSelecionados.includes (this.itemSelecionado)) {
-//			let index = this.itensSelecionados.indexOf(this.itemSelecionado);
-//			let item = this.itensSelecionados[index];
-//			item.valorTotal = this.itemSelecionado.valorTotal;
-////			this.itensSelecionados.push(this.itemSelecionado);
-//		} else {
-//			this.itensSelecionados.push(this.itemSelecionado);
-//		}
-		this.produtoService.gravaItens().then(
+		this.itemPedidoService.gravaItens().then(
 			resultado => {
-				this.preencheValorTotalCarrinho(resultado.valorTotal);
+				this.preencheValorTotalCarrinho(resultado);
 			},
 			erro => {
 				alert(erro);
 			}
 		);
-		
-//		this.totalizaProdutos();
-		//this.itensSelecionados
 	}
 	
 	preencheValorTotalCarrinho(valor) {
-		console.log(`>>> total do carrinhos ${total}`);
-		this.totalCarrinhoTxt.innerHTML= "R$ " + total.toFixed(2) ;
+		console.log(`>>> total do carrinhos ${valor}`);
+		this.totalCarrinhoTxt.innerHTML= "R$ " + valor.toFixed(2) ;
 	}
-//	totalizaProdutos() {
-//		let total = this.itensSelecionados.reduce( (inicio, item) => {
-//			return inicio +item.valorTotal;
-//		}, 0);
-		
-//		let alterados = this.produtoService.getItensAlterados();
-//		let total=0;
-//		let item = {};
-//		for(let i = 0 ; i < alterados.length; i++) {
-//			item=this.itensSelecionados[i];
-//			console.log(`>>> item: ${item.id} - valor: ${item.valorTotal}`);
-//			total+= item.valorTotal;
-//		}
-//		this.produtoService.gravaItem(item).then (
-//				itemNovo => {
-//					item.valorTotal = itemNovo.valorTotal;
-//					console.log(`>>> total do carrinhos ${total}`);
-//					this.totalCarrinhoTxt.innerHTML= "R$ " + total.toFixed(2) ;
-//				} , error => {
-//					console.error(error);
-//				}
-//		);
-//	}
 	
 }

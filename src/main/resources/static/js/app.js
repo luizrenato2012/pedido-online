@@ -1,21 +1,20 @@
-produtoController = new ProdutoController();
-produtoController.listaProdutos();
+itemPedidoController = new ItemPedidoController();
+itemPedidoController.listaProdutos();
 
 window.addEventListener('load', function () {
 	console.log('>> carregando a pagina');
 });
 
 seleciona  = (id) => {
-	console.log(">>> selecionado " + id);
-	this.produtoController.preencheSelecao(id);
+	this.itemPedidoController.preencheSelecao(id);
 }
 
 //adicionaItem = (id) => {
-//	produtoController.adicionaItem.bind(id);
+//	itemPedidoController.adicionaItem.bind(id);
 //}
 
-document.querySelector('#quant').addEventListener('change', produtoController.calculaItem.bind(produtoController));
-document.querySelector('#btnAdiciona').addEventListener('click', produtoController.adicionaItem.bind(produtoController));
+document.querySelector('#quant').addEventListener('change', itemPedidoController.calculaItem.bind(itemPedidoController));
+document.querySelector('#btnAdiciona').addEventListener('click', itemPedidoController.adicionaItem.bind(itemPedidoController));
 		
 process = (quant) => {
 	let quantTxt = document.getElementById("quant");
@@ -26,5 +25,5 @@ process = (quant) => {
     } else{
     	quantTxt.value = value;
     }
-    produtoController.calculaItem();
+    itemPedidoController.calculaItem();
 }
