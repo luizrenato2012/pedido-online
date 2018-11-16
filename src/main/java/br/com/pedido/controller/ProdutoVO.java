@@ -14,6 +14,23 @@ public class ProdutoVO {
 	private Integer quantidade;
 	private BigDecimal valorTotal;
 	
+	public ProdutoVO() {
+		super();
+	}
+	
+	public ProdutoVO(int id, int numero, int idProduto, String nome, String descricao, byte[] imagem,
+			BigDecimal valorUnitario, Integer quantidade, BigDecimal valorTotal) {
+		super();
+		this.id = id;
+		this.numero = numero;
+		this.idProduto = idProduto;
+		this.nome = nome;
+		this.descricao = descricao;
+		this.imagem = imagem;
+		this.valorUnitario = valorUnitario;
+		this.quantidade = quantidade;
+		this.valorTotal = valorTotal;
+	}
 	public int getId() {
 		return id;
 	}
