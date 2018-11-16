@@ -62,8 +62,10 @@ public class ItemPedidoResource {
 		return ResponseEntity.ok(item);
 	}
 	
-	public ResponseEntity<ProdutoVO> listaTodos() {
-		
+	@GetMapping("/inicio")
+	public ResponseEntity<List<ProdutoVOTeste>> listaTodos() {
+		List<ProdutoVOTeste> lista = this.itemService.listaItensIniciais();
+		return new ResponseEntity<List<ProdutoVOTeste>>(lista, HttpStatus.OK);
 	}
 	
 	@PostMapping
