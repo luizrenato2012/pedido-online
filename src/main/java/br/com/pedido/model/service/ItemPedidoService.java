@@ -40,8 +40,34 @@ public class ItemPedidoService {
 				.reduce((valor1,valor2) -> valor1.add(valor2))
 				.orElse(BigDecimal.ZERO);
 		return totalItens;
-		
 	}
+	
+	@Transactional
+	public BigDecimal gravaItem(ItemVO itemVO) {
+		
+		ItemPedido itemAtual = this.itemRepository.findOne(itemVO.getId());
+		if (itemAtual==null) {
+			this.itemRepository.save(itemAtual);
+			itemVO.setId(itemAtual.getId());
+		} else {
+			itemAtual.setProduto(this.produtoRepository.findOne(itemVO.getIdProduto()));
+			itemAtual.setNumero(itemVO.getNumero());
+			itemAtual.setQuantidade(itemVO.getQuantidade());
+			itemAtual.setValorUnitario(itemVO.getValorUnitario());
+			itemAtual.setValorTotal(itemVO.getValorTotal());
+		}
+		this.itemRepository.save(itemAtual);
+		
+		List<ItemPedido> itens = this.itemRepository.findByIdPedido(itemVO.getIdPedido());
+		
+		BigDecimal totalItens = itens.stream()
+				.map(item -> item.getValorTotal())
+				.reduce((valor1,valor2) -> valor1.add(valor2))
+				.orElse(BigDecimal.ZERO);
+		return totalItens;
+	}
+	
+	
 
 	private List<Integer> buscaIdsItemPedido(List<ItemVO> itensVO) {
 		List<Integer> listaIds = itensVO

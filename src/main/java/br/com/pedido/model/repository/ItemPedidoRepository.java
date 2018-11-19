@@ -32,5 +32,8 @@ public interface ItemPedidoRepository extends JpaRepository<ItemPedido, Integer>
 				nativeQuery=true
 	)
 	public List<ProdutoVO> listaInicio();
+	
+	@Query("select item from ItemPedido item left join fetch item.pedido pedido where pedido.id = $1")
+	public List<ItemPedido> findByIdPedido(Integer idPedido);
 }
 

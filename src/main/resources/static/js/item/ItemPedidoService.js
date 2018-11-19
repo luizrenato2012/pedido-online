@@ -24,21 +24,38 @@ class ItemPedidoService {
 	}
 	
 	gravaItens() {
-		let urlGrava = "http://localhost:8080/api/itens";
+		let urlGrava = "http://localhost:8080/api/itens/itens";
 		let produtos = this.getItensAlterados();
 		if (produtos===undefined || produtos.length==0) {
 			return new Promisse( (resolve, reject) => {
 				reject("Lista vazia");
 			});
 		}
+		
 		return new Promise( (resolve, reject) => {
 			this.httpHelper.post(urlGrava, produtos).then(
 					sucesso => {
-						console.log('resultado graItens: ' + sucesso);
+						console.log('resultado gravaItens: ' + sucesso);
 						resolve(sucesso);
 					},
 					erro => {
 						reject("Erro ao gravar itens:\n" + erro.status + " - " + erro.error);
+					}
+			);
+		});
+	}
+	
+	
+	gravaItem(item) {
+		let urlGravaItem = "http://localhost:8080/api/itens";
+		return new Promise( (resolve, reject) => {
+			this.httpHelper.post(urlGravaItem, item).then(
+					sucesso => {
+						//console.log('resultado gravaItem: ' + sucesso);
+						resolve(sucesso);
+					},
+					erro => {
+						reject("Erro ao gravar item:\n" + erro.status + " - " + erro.error);
 					}
 			);
 		});

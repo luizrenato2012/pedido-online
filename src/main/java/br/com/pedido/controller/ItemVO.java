@@ -76,6 +76,21 @@ public class ItemVO {
 	public void setIdPedido(int idPedido) {
 		this.idPedido = idPedido;
 	}
-	
 
+	public Integer getIdProduto() {
+		return idProduto;
+	}
+
+	public void setIdProduto(Integer idProduto) {
+		this.idProduto = idProduto;
+	}
+
+	public Integer getNumero() {
+		return numero;
+	}
+
+	public void setNumero(Integer numero) {
+		this.numero = numero;
+	}
+	
 }
