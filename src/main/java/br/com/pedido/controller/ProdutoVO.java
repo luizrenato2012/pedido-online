@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 public interface ProdutoVO {
 	
+	public Integer getIdPedido();
 	public Integer getIdItem();
 	public Integer getNumero();
 	public Integer getIdProduto();

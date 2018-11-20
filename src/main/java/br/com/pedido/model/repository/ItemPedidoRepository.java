@@ -17,7 +17,8 @@ public interface ItemPedidoRepository extends JpaRepository<ItemPedido, Integer>
 //	https://stackoverflow.com/questions/13012584/jpa-how-to-convert-a-native-query-result-set-to-pojo-class-collection/21487061
 	@Query (
 		value="select \r\n" + 
-				"	it.id id_pedido,\r\n" + 
+				"	it.id_pedido id_pedido,\r\n" + 
+				"   it.id id_item,\r\n"+
 				"	row_number() over (order by descricao)  numero,\r\n" + 
 				"	p.id  id_produto,\r\n" + 
 				"	p.nome  nome,\r\n" + 
@@ -27,7 +28,9 @@ public interface ItemPedidoRepository extends JpaRepository<ItemPedido, Integer>
 				"	case when  it.quantidade is not null then it.quantidade else 0 end  quantidade,\r\n" + 
 				"	case when it.valor_total is not null then it.valor_total else 0 end  valor_total \r\n" + 
 				"from pedido.produto p\r\n" + 
-				"left join pedido.item_pedido it on it.id_produto=p.id \r\n" + 
+				"left join pedido.item_pedido it on it.id_produto=p.id \r\n" +
+				"left join pedido.pedido ped on it.id_pedido = ped.id"+
+				"where ped.numero = $1"+
 				"order by p.nome\r\n",
 				nativeQuery=true
 	)
