@@ -89,6 +89,7 @@ class ItemPedidoController {
 	
 	adicionaItem() {
 		console.log(`adiciona item ${this.itemSelecionado.id} - total ${this.itemSelecionado.valorTotal}`);
+		//TODO troca para gravaItens
 		this.itemPedidoService.gravaItem(this.itemSelecionado).then(
 			resultado => {
 				this.itemSelecionado = resultado.item;

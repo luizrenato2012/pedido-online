@@ -24,18 +24,19 @@ class ItemPedidoService {
 	
 	gravaItens() {
 		let urlGrava = "http://localhost:8080/api/itens/itens";
-		let produtos = this.getItensAlterados();
-		if (produtos===undefined || produtos.length==0) {
+		let itensAnterados = this.getItensAlterados();
+		if (itensAnterados===undefined || itensAnterados.length==0) {
 			return new Promisse( (resolve, reject) => {
 				reject("Lista vazia");
 			});
 		}
 		
 		return new Promise( (resolve, reject) => {
-			this.httpHelper.post(urlGrava, produtos).then(
+			this.httpHelper.post(urlGrava, itensAnterados).then(
 					sucesso => {
 						console.log('resultado gravaItens: ' + sucesso);
-						resolve(sucesso);
+						// TODO tratar lista de produtos VO pra que tenham os ID vindos da lista retornada pelo servidor
+						resolve(sucesso); 
 					},
 					erro => {
 						reject("Erro ao gravar itens:\n" + erro.status + " - " + erro.error);
