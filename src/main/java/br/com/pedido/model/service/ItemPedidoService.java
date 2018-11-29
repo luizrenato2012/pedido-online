@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,22 +25,34 @@ public class ItemPedidoService {
 	@Autowired
 	private ProdutoRepository produtoRepository;
 	
+	private Logger log = Logger.getLogger(ItemPedidoService.class);
+	
 	@Transactional
-	public BigDecimal gravaItens(List<ItemVO> itensVO) {
-		List<Integer> listaIds = buscaIdsItemPedido(itensVO);
-		if(listaIds==null || listaIds.size()==0) {
-			throw new RuntimeException("Lista de itens vazia");
-		}
-		
-		this.itemRepository.deleteByIdIn(listaIds);
+	public List<ItemVO> gravaItens(List<ItemVO> itensVO) {
+		this.excluiItensExistentes(itensVO);
 		
 		List<ItemPedido> itens = this.converteListaVO(itensVO);
 		this.itemRepository.save(itens);
+		itensVO = this.converteListaItens(itens);
+		return itensVO;
+	}
+	
+	public BigDecimal totalizaItens(List<ItemVO> itens) {
 		BigDecimal totalItens = itens.stream()
 				.map(item -> item.getValorTotal())
 				.reduce((valor1,valor2) -> valor1.add(valor2))
 				.orElse(BigDecimal.ZERO);
 		return totalItens;
+		
+	}
+
+	private void excluiItensExistentes(List<ItemVO> itensVO) {
+		List<Integer> listaIds = this.buscaIdsItemPedido(itensVO);
+		if(listaIds!=null || listaIds.size()==0) {
+			this.log.info("Lista de itens vazia");
+			return;
+		}
+		this.itemRepository.deleteByIdIn(listaIds);
 	}
 	
 	@Transactional
@@ -88,17 +101,37 @@ public class ItemPedidoService {
 		ItemPedido item = new ItemPedido();
 		item.setProduto(this.produtoRepository.findOne(itemVO.getId()));
 //		item.setNumero(numero); TODO numero deve retornado pela VIEW oua query retornar
-		item.setValorUnitario(itemVO.getValorUnitario());
+		item.setValorUnitario(itemVO.getValorUnitario()); //TODO setar Pedido
 		item.setQuantidade(itemVO.getQuantidade());
 		item.setValorTotal(itemVO.getValorTotal());
 		return item;
 	}
 	
+	private List<ItemVO> converteListaItens(List<ItemPedido> itens) {
+		return itens.stream()
+				.map(item -> this.converteItem(item))
+				.collect(Collectors.toList());
+	}
+	
+	private ItemVO converteItem(ItemPedido item) {
+		ItemVO itemVO = new ItemVO();
+		itemVO.setId(item.getId());
+		itemVO.setIdProduto(item.getProduto().getId());
+//		itemVO.setNumero(numero);
+		itemVO.setQuantidade(item.getQuantidade());
+		itemVO.setValorTotal(item.getValorTotal());
+		itemVO.setValorUnitario(itemVO.getValorUnitario());
+		return itemVO;
+	}
 	public ItemPedido save(ItemPedido item) {
 		return this.itemRepository.save(item);
 	}
 	
 	public List<ProdutoVO> listaItensIniciais() {
 		return this.itemRepository.listaInicio();
+	}
+
+	public void delete(Integer id) {
+		this.itemRepository.delete(id);
 	}
 }

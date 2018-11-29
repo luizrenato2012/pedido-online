@@ -5,22 +5,16 @@ import java.math.BigDecimal;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+/**
+ * VO com dados de itens que serao gravados ao incluir 
+ * @author Luiz Renato
+ *
+ */
 public class ItemVO {
 	
-	public ItemVO() {
-		super();
-	}
+	@JsonInclude(content=Include.NON_NULL)
+	private Integer id;
 	
-	public ItemVO(int id, BigDecimal valorUnitario, int quantidade, BigDecimal valorTotal) {
-		super();
-		this.id = id;
-		this.valorUnitario = valorUnitario;
-		this.quantidade = quantidade;
-		this.valorTotal = valorTotal;
-	}
-	
-	
-	private int id;
 	@JsonInclude(content=Include.NON_NULL)
 	private int idPedido;
 	
@@ -37,8 +31,20 @@ public class ItemVO {
 	@JsonInclude(content=Include.NON_NULL)
 	private Integer numero;
 	
-	public int getId() {
-		return id;
+	public ItemVO() {
+		super();
+	}
+	
+	public ItemVO(int id, BigDecimal valorUnitario, int quantidade, BigDecimal valorTotal) {
+		super();
+		this.id = id;
+		this.valorUnitario = valorUnitario;
+		this.quantidade = quantidade;
+		this.valorTotal = valorTotal;
+	}
+	
+	public Integer getId() {
+		return this.id;
 	}
 
 	public void setId(int id) {

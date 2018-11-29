@@ -1,0 +1,15 @@
+Adicionar item (botão + do dialog de itens)
+ - cliente manda lista de todos os VO com quantidade > 0
+ 
+ - servidor pega todos os VO´s recebidos:
+ 	-> exlcui os que existirem no banco de dados
+ 	-> transforma os VO´s em item de pedido
+ 	-> grava os itens
+ 	-> retorna :
+ 		-- lista de VO´s atualizadas com id do item
+ 		-- total dos valores dos itens
+ 
+ - cliente recebe retorno do servidor
+ 	-> atualiza label de valor total do carrinho
+ 	-> atualiza itens da tela ( refletir o ID dos itens gravados no servidor)
+ 	 

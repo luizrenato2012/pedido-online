@@ -29,8 +29,8 @@ public interface ItemPedidoRepository extends JpaRepository<ItemPedido, Integer>
 				"	case when it.valor_total is not null then it.valor_total else 0 end  valor_total \r\n" + 
 				"from pedido.produto p\r\n" + 
 				"left join pedido.item_pedido it on it.id_produto=p.id \r\n" +
-				"left join pedido.pedido ped on it.id_pedido = ped.id"+
-				"where ped.numero = $1"+
+				"left join pedido.pedido ped on it.id_pedido = ped.id \r\n"+
+			//	"where (ped.numero = $1) or (1=1) \r\n"+
 				"order by p.nome\r\n",
 				nativeQuery=true
 	)

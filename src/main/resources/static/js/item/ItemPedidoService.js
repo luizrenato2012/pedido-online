@@ -10,7 +10,6 @@ class ItemPedidoService {
 		return new Promise ( (resolve, reject) => {
 			this.httpHelper.get(urlListaItens).then (
 					sucesso => {
-						//this.mapItens = new Map();
 					//	console.log('listaPedido ' + JSON.stringify(sucesso));
 					     this.itens = sucesso;
 						resolve(this.itens);

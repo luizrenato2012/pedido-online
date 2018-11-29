@@ -15,7 +15,7 @@ class ItemPedidoController {
 		this.totalCarrinhoTxt = document.querySelector("#txtTotalCarrinho");
 	}
 	
-	listaItens() {
+	iniciaItens() {
 		this.itemPedidoService.listaItens().then (
 				produtos => {
 					this.template(produtos);

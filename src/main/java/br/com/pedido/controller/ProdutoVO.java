@@ -2,6 +2,11 @@ package br.com.pedido.controller;
 
 import java.math.BigDecimal;
 
+/**
+ * VO com dados a sereme exibidos na lista de produtos
+ * @author Luiz Renato
+ *
+ */
 public interface ProdutoVO {
 	
 	public Integer getIdPedido();

@@ -72,18 +72,26 @@ public class ItemPedidoResource {
 	
 	@PostMapping("/itens")
 	//DESCONSIDERANDO O ID DO ITEM (DEVE-SE CHEGAR E TRATAR NA VIEW P/ SEPARAR ID DO ITEM E DO PRODUTO
-	public ResponseEntity<BigDecimal> adicionaItens( @RequestBody List<ItemVO> itensVO) {
-		BigDecimal totalCarrinho = this.itemService.gravaItens(itensVO);
-		return new ResponseEntity(totalCarrinho, HttpStatus.ACCEPTED);
+	public ResponseEntity<Map<String,Object>> adicionaItens( @RequestBody List<ItemVO> itensVO) {
+		List<ItemVO>itens = this.itemService.gravaItens(itensVO);
+		BigDecimal totalCarrinho = this.itemService.totalizaItens(itensVO);
+		Map<String,Object> retorno = new HashMap<>();
+		retorno.put("itens", itens);
+		retorno.put("totalCarrinho", totalCarrinho);
+		return new ResponseEntity(retorno, HttpStatus.ACCEPTED);
 	}
 	
-	@PostMapping
-	public ResponseEntity<Map<String,Object>> adicionaItem( @RequestBody ItemVO itemVO) {
-		BigDecimal totalCarrinho = this.itemService.gravaItem(itemVO);
-		Map<String,Object> retorno = new HashMap<>();
-		retorno.put("item", itemVO);
-		retorno.put("totalCarrinho", totalCarrinho);
-		return new ResponseEntity(retorno,	HttpStatus.ACCEPTED);
-	}
+//	@PostMapping
+//	public ResponseEntity<Map<String,Object>> adicionaItem( @RequestBody ItemVO itemVO) {
+//		if (itemVO.getQuantidade()==0 && itemVO.getId()!=null) {
+//			this.itemService.delete(itemVO.getId());
+//			return new ResponseEntity(itemVO,HttpStatus.ACCEPTED);
+//		}
+//		
+//		BigDecimal totalCarrinho = this.itemService.gravaItem(itemVO);
+//		Map<String,Object> retorno = new HashMap<>();
+//		retorno.put("item", itemVO);
+//		retorno.put("totalCarrinho", totalCarrinho);
+//	}
 	
 }

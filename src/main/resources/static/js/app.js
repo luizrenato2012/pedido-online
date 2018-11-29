@@ -1,5 +1,5 @@
 itemPedidoController = new ItemPedidoController();
-itemPedidoController.listaItens();
+itemPedidoController.iniciaItens();
 
 window.addEventListener('load', function () {
 	console.log('>> carregando a pagina');
