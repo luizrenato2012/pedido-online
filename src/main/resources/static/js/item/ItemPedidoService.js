@@ -2,7 +2,7 @@ class ItemPedidoService {
 	
 	constructor() {
 		this.httpHelper = new HttpHelper();
-		this.itens = [];
+		this.produtosVO = [];
 	}
 	
 	listaItens() {
@@ -11,8 +11,8 @@ class ItemPedidoService {
 			this.httpHelper.get(urlListaItens).then (
 					sucesso => {
 					//	console.log('listaPedido ' + JSON.stringify(sucesso));
-					     this.itens = sucesso;
-						resolve(this.itens);
+					     this.produtosVO = sucesso;
+						resolve(this.produtosVO);
 					},
 					error => {
 						reject("Erro ao listar produtos " + error);
@@ -23,7 +23,7 @@ class ItemPedidoService {
 	}
 	
 	gravaItens() {
-		let urlGrava = "http://localhost:8080/api/itens/itens";
+		let urlGrava = "http://localhost:8080/api/itens";
 		let itensAnterados = this.getItensAlterados();
 		if (itensAnterados===undefined || itensAnterados.length==0) {
 			return new Promisse( (resolve, reject) => {
@@ -36,7 +36,8 @@ class ItemPedidoService {
 					sucesso => {
 						console.log('resultado gravaItens: ' + sucesso);
 						// TODO tratar lista de produtos VO pra que tenham os ID vindos da lista retornada pelo servidor
-						resolve(sucesso); 
+						this.trataItensVO(sucesso.itens)
+						resolve(sucesso.totalCarrinho); 
 					},
 					erro => {
 						reject("Erro ao gravar itens:\n" + erro.status + " - " + erro.error);
@@ -45,30 +46,48 @@ class ItemPedidoService {
 		});
 	}
 	
-	
-	gravaItem(item) {
-		let urlGravaItem = "http://localhost:8080/api/itens";
-		return new Promise( (resolve, reject) => {
-			this.httpHelper.post(urlGravaItem, item).then(
-					sucesso => {
-						//console.log('resultado gravaItem: ' + sucesso);
-						resolve(sucesso);
-					},
-					erro => {
-						reject("Erro ao gravar item:\n" + erro.status + " - " + erro.error);
-					}
-			);
-		});
+	/** itera por todos os itensVO e seta idItem daqueles que tem o mesmo idProduto */
+	trataItensVO(itensVO) {
+		//lista dos idProduto da lista de produtos da tela
+		let idsProduto = this.produtosVO.map (item => item.idProduto);
+		
+		//para cada item
+		itensVO.forEach( item => {
+			// se id produto do item atual estiver na lista de id´s de produto
+			if( idsProduto.includes (item.idProduto)){
+				//busca o produtoVO da tela
+				let produtoVO = this.produtosVO.filter(produto => produto.idProduto== item.idProduto);
+				//seta idItem e valor total
+				produtoVo.idItem = item.id;
+				produtoVo.valorTotal = item.valorTotal;
+			}
+		})
 	}
 	
-	getItemSelecionado(id) {
-		return this.itens.filter( item => item.idItem==id)[0];
+	
+//	gravaItem(item) {
+//		let urlGravaItem = "http://localhost:8080/api/itens";
+//		return new Promise( (resolve, reject) => {
+//			this.httpHelper.post(urlGravaItem, item).then(
+//					sucesso => {
+//						//console.log('resultado gravaItem: ' + sucesso);
+//						resolve(sucesso);
+//					},
+//					erro => {
+//						reject("Erro ao gravar item:\n" + erro.status + " - " + erro.error);
+//					}
+//			);
+//		});
+//	}
+	
+	getItemSelecionado(idProduto) {
+		return this.produtosVO.filter( item => item.idProduto==idProduto)[0];
 	}
 	
 	/** itens que tiveram suas quantidade e valor total alterados*/
 	getItensAlterados() {
-		let alterados = this.itens.filter(item => ( item.valorTotal != undefined && item.valorTotal != 0 )); 
-		let retorno = alterados.map( function (item) { 
+		let alterados = this.produtosVO.filter(item => ( item.valorTotal != undefined && item.valorTotal != 0 )); 
+		let retorno = alterados.map( (item) => { 
 			return { 
 				id: item.idItem,
 				idProduto : item.idProduto,

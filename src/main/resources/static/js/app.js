@@ -16,7 +16,7 @@ seleciona  = (id) => {
 document.querySelector('#quant').addEventListener('change', itemPedidoController.calculaItem.bind(itemPedidoController));
 document.querySelector('#btnAdiciona').addEventListener('click', itemPedidoController.adicionaItem.bind(itemPedidoController));
 		
-process = (quant) => {
+aumentaQuantidade = (quant) => {
 	let quantTxt = document.getElementById("quant");
     var value = parseInt(quantTxt.value);
     value+=quant;

@@ -13,7 +13,7 @@ class HttpHelper {
 						// console.log('Obtendo a lista de produtos');
 						resolve(JSON.parse(xhr.responseText));
 					} else {
-						console.log('xhr status:  '+ xhr.readyState );
+						//console.log('xhr status:  '+ xhr.readyState );
 						reject({status :xhr.status, error : xhr.responseText});
 					}
 				} 

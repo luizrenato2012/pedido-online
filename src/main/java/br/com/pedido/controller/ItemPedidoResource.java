@@ -36,20 +36,11 @@ public class ItemPedidoResource {
 	@Autowired
 	private PedidoRepository pedidoRepository;
 	
-	private List<ItemPedido> listaTemp;
-	
-	@PostConstruct
-	private void init() {
-		this.listaTemp = new ArrayList<>();
-	}
-	
 	@GetMapping("/teste")
 	public ResponseEntity<ItemPedido> teste() {
 		Produto produto = this.produtoReposiory.findOne(1);
-		//this.pedidoRepository.save(pedido);
 		
 		ItemPedido item = new ItemPedido();
-	//	item.setPedido(pedido);
 		item.setNumero(1);
 		item.setProduto(produto);
 		item.setQuantidade(1);
@@ -57,10 +48,6 @@ public class ItemPedidoResource {
 		item.setValorTotal(  item.getValorUnitario().multiply(BigDecimal.valueOf(item.getQuantidade())));
 		this.itemService.save(item);
 		
-		//pedido.setItens(new ArrayList<>());
-		//pedido.getItens().add(item);
-		//pedido.setValorTotal(item.getValorTotal());
-		//this.pedidoRepository.save(pedido);
 		return ResponseEntity.ok(item);
 	}
 	
@@ -70,14 +57,15 @@ public class ItemPedidoResource {
 		return new ResponseEntity<List<ProdutoVO>>(lista, HttpStatus.OK);
 	}
 	
-	@PostMapping("/itens")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@PostMapping
 	//DESCONSIDERANDO O ID DO ITEM (DEVE-SE CHEGAR E TRATAR NA VIEW P/ SEPARAR ID DO ITEM E DO PRODUTO
 	public ResponseEntity<Map<String,Object>> adicionaItens( @RequestBody List<ItemVO> itensVO) {
 		List<ItemVO>itens = this.itemService.gravaItens(itensVO);
 		BigDecimal totalCarrinho = this.itemService.totalizaItens(itensVO);
 		Map<String,Object> retorno = new HashMap<>();
 		retorno.put("itens", itens);
-		retorno.put("totalCarrinho", totalCarrinho);
+		retorno.put("valorCarrinho", totalCarrinho);
 		return new ResponseEntity(retorno, HttpStatus.ACCEPTED);
 	}
 	

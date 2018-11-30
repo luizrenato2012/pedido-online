@@ -48,7 +48,7 @@ public class ItemPedidoService {
 
 	private void excluiItensExistentes(List<ItemVO> itensVO) {
 		List<Integer> listaIds = this.buscaIdsItemPedido(itensVO);
-		if(listaIds!=null || listaIds.size()==0) {
+		if(listaIds==null || listaIds.size()==0) {
 			this.log.info("Lista de itens vazia");
 			return;
 		}
@@ -86,6 +86,7 @@ public class ItemPedidoService {
 		List<Integer> listaIds = itensVO
 					.stream()
 					.map(item -> item.getId())
+					.filter(id -> id!=null && id != 0)
 					.collect(Collectors.toList());
 		return listaIds;
 	}
@@ -99,8 +100,8 @@ public class ItemPedidoService {
 	
 	private ItemPedido converteVO(ItemVO itemVO) {
 		ItemPedido item = new ItemPedido();
-		item.setProduto(this.produtoRepository.findOne(itemVO.getId()));
-//		item.setNumero(numero); TODO numero deve retornado pela VIEW oua query retornar
+		item.setProduto(this.produtoRepository.findOne(itemVO.getIdProduto()));
+		item.setNumero(itemVO.getNumero()); // TODO numero deve retornado pela VIEW oua query retornar
 		item.setValorUnitario(itemVO.getValorUnitario()); //TODO setar Pedido
 		item.setQuantidade(itemVO.getQuantidade());
 		item.setValorTotal(itemVO.getValorTotal());
@@ -117,10 +118,10 @@ public class ItemPedidoService {
 		ItemVO itemVO = new ItemVO();
 		itemVO.setId(item.getId());
 		itemVO.setIdProduto(item.getProduto().getId());
-//		itemVO.setNumero(numero);
+		itemVO.setNumero(item.getNumero());
 		itemVO.setQuantidade(item.getQuantidade());
 		itemVO.setValorTotal(item.getValorTotal());
-		itemVO.setValorUnitario(itemVO.getValorUnitario());
+		itemVO.setValorUnitario(item.getValorUnitario());
 		return itemVO;
 	}
 	public ItemPedido save(ItemPedido item) {

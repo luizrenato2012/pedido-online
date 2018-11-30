@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 /**
  * VO com dados a sereme exibidos na lista de produtos
  * @author Luiz Renato
- *
+ * necessario interface por conta da query nativa no Spring data
  */
 public interface ProdutoVO {
 	

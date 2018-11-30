@@ -29,7 +29,7 @@ class ItemPedidoController {
 		let content = 
 			`<div class="list-group">
 				${produtos.map ( item => 
-					`<a href="#" class="list-group-item comando"  data-toggle="modal" data-target="#myModal" onclick="seleciona(${item.idItem})">
+					`<a href="#" class="list-group-item comando"  data-toggle="modal" data-target="#myModal" onclick="seleciona(${item.idProduto})">
 			<input type="hidden" name="id_item" value="${item.idItem}"/>
 					<table>
 						<tbody>
@@ -53,19 +53,21 @@ class ItemPedidoController {
 		divTable.innerHTML = content;
 	}
 	
-	preencheSelecao (id) {
-		this.itemSelecionado = this.itemPedidoService.getItemSelecionado(id);
-		//console.log('preenche Selecao ' + id);
+	preencheSelecao (idProduto) {
+		this.itemSelecionado = this.itemPedidoService.getItemSelecionado(idProduto); //alterarado campo de chave p/ id produto
+		console.log('ItemPedidoController preenche/selecao ' + this.itemSelecionado);
 		this.nomeLbl.innerHTML=this.itemSelecionado.nome;
 		this.descricaoLbl.innerText=this.itemSelecionado.descricao;
-		this.precoTxt.innerText= 'R$ ' + parseFloat(this.itemSelecionado.valorUnitario);
 		this.imagemImg.src="data:image/png;base64, "+ this.itemSelecionado.imagem;
 		
-		let quant = this.quantidadeTxt.value;
-		this.itemSelecionado.quantidade = parseFloat(this.quantidadeTxt.value);
-		
-		this.itemSelecionado.valorTotal = this.itemSelecionado.valorUnitario * this.itemSelecionado.quantidade;
+		this.precoTxt.innerText= 'R$ ' + parseFloat(this.itemSelecionado.valorUnitario);
+		this.quantidadeTxt.innerText = this.itemSelecionado.quantidade;
 		this.valorItemTxt.innerText= 'R$ ' + this.itemSelecionado.valorTotal;
+		
+//		let quant = this.quantidadeTxt.value;
+//		this.itemSelecionado.quantidade = parseFloat(this.quantidadeTxt.value);
+		
+//		this.itemSelecionado.valorTotal = this.itemSelecionado.valorUnitario * this.itemSelecionado.quantidade;
 	}
 	
 	calculaItem() {
@@ -90,13 +92,13 @@ class ItemPedidoController {
 	adicionaItem() {
 		console.log(`adiciona item ${this.itemSelecionado.id} - total ${this.itemSelecionado.valorTotal}`);
 		//TODO troca para gravaItens
-		this.itemPedidoService.gravaItem(this.itemSelecionado).then(
+		this.itemPedidoService.gravaItens(this.itemSelecionado).then(
 			resultado => {
-				this.itemSelecionado = resultado.item;
 				this.preencheValorTotalCarrinho(resultado.valorCarrinho);
 			},
 			erro => {
-				alert(erro);
+				console.log(erro);
+				alert("Erro ao adicionar item");
 			}
 		);
 	}
