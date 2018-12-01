@@ -47,7 +47,7 @@ class ItemPedidoController {
 					</table>
 				</a> 
 				
-				`).join('')};
+				`).join('')}
 				</div>`;
 		let divTable = document.querySelector('#table_produtos');
 		divTable.innerHTML = content;
@@ -64,15 +64,10 @@ class ItemPedidoController {
 		this.quantidadeTxt.value = this.itemSelecionado.quantidade;
 		this.valorItemTxt.innerText= 'R$ ' + this.itemSelecionado.valorTotal;
 		
-//		let quant = this.quantidadeTxt.value;
-//		this.itemSelecionado.quantidade = parseFloat(this.quantidadeTxt.value);
-		
-//		this.itemSelecionado.valorTotal = this.itemSelecionado.valorUnitario * this.itemSelecionado.quantidade;
 	}
 	
 	calculaItem() {
 		let quantidade = parseFloat(this.quantidadeTxt.value);
-//		console.log('alterada quantidade '+ quantidade);
 		if (quantidade==0) {
 			this.valorItemTxt.innerText="R$ 0,0";
 			return;
@@ -80,11 +75,9 @@ class ItemPedidoController {
 		
 		let valorUnitario = parseFloat(this.precoTxt.innerText.substring(3));
 		
-	//	console.log(`preco ${preco} - quant. ${quantidade}`);
 		this.itemSelecionado.quantidade = quantidade;
 		let total = (valorUnitario * quantidade);
 		this.itemSelecionado.valorTotal = total;
-	//	console.log(`total ${total}`); 
 		
 		this.valorItemTxt.innerText ="R$ " +(total.toFixed(2))+"";
 	}

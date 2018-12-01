@@ -8,6 +8,8 @@ class ItemPedidoService {
 	listaItens() {
 		let urlListaItens = "http://localhost:8080/api/itens/inicio";
 		return new Promise ( (resolve, reject) => {
+			let r1  =resolve;
+			let r2 = reject;
 			this.httpHelper.get(urlListaItens).then (
 					sucesso => {
 					//	console.log('listaPedido ' + JSON.stringify(sucesso));
@@ -25,6 +27,7 @@ class ItemPedidoService {
 	gravaItens() {
 		let urlGrava = "http://localhost:8080/api/itens";
 		let itensAnterados = this.getItensAlterados();
+		
 		if (itensAnterados===undefined || itensAnterados.length==0) {
 			return new Promisse( (resolve, reject) => {
 				reject("Lista vazia");
@@ -32,11 +35,14 @@ class ItemPedidoService {
 		}
 		
 		return new Promise( (resolve, reject) => {
+			let resolve2 = resolve;
+			let reject2 = reject;
 			this.httpHelper.post(urlGrava, itensAnterados).then(
 					sucesso => {
 						console.log('resultado gravaItens: ' + sucesso);
 						// TODO tratar lista de produtos VO pra que tenham os ID vindos da lista retornada pelo servidor
 						this.trataItensVO(sucesso.itens);
+						this.teste();
 						resolve(sucesso); 
 					},
 					erro => {
@@ -46,22 +52,27 @@ class ItemPedidoService {
 		});
 	}
 	
+	teste () {
+		console.log('Teste antes de resolve');
+	}
+	
 	/** itera por todos os itensVO e seta idItem daqueles que tem o mesmo idProduto */
 	trataItensVO(itensVO) {
 		//lista dos idProduto da lista de produtos da tela
 		let idsProduto = this.produtosVO.map (item => item.idProduto);
 		
 		//para cada item
-		itensVO.forEach( item => {
-			// se id produto do item atual estiver na lista de id´s de produto
-			if( idsProduto.includes (item.idProduto)){
-				//busca o produtoVO da tela
-				let produtoVO = this.produtosVO.filter(produto => produto.idProduto== item.idProduto);
-				//seta idItem e valor total
-				produtoVo.idItem = item.id;
-				produtoVo.valorTotal = item.valorTotal;
-			}
-		})
+//		itensVO.forEach( item => {
+//			// se id produto do item atual estiver na lista de id´s de produto
+//			if( idsProduto.includes (item.idProduto)){
+//				//busca o produtoVO da tela
+//				let produtoVO = this.produtosVO.filter(produto => produto.idProduto== item.idProduto);
+//				//seta idItem e valor total
+//				produtoVo.idItem = item.id;
+//				produtoVo.valorTotal = item.valorTotal;
+//			}
+//		});
+		console.log('Fim trataItensVO');
 	}
 	
 	
