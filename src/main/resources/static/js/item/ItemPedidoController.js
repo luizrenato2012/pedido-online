@@ -61,7 +61,7 @@ class ItemPedidoController {
 		this.imagemImg.src="data:image/png;base64, "+ this.itemSelecionado.imagem;
 		
 		this.precoTxt.innerText= 'R$ ' + parseFloat(this.itemSelecionado.valorUnitario);
-		this.quantidadeTxt.innerText = this.itemSelecionado.quantidade;
+		this.quantidadeTxt.value = this.itemSelecionado.quantidade;
 		this.valorItemTxt.innerText= 'R$ ' + this.itemSelecionado.valorTotal;
 		
 //		let quant = this.quantidadeTxt.value;
