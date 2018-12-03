@@ -93,6 +93,7 @@ public class ItemPedidoService {
 
 	private List<ItemPedido> converteListaVO(List<ItemVO> itensVO) {
 		List<ItemPedido> itens = itensVO.stream()
+					.filter(item -> item.getQuantidade() > 0)
 					.map(item -> this.converteVO(item) )
 					.collect(Collectors.toList());
 		return itens;

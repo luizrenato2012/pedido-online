@@ -60,18 +60,24 @@ class ItemPedidoService {
 	trataItensVO(itensVO) {
 		//lista dos idProduto da lista de produtos da tela
 		let idsProduto = this.produtosVO.map (item => item.idProduto);
-		
+		let item = null;
+		let produto = null;
+		let produtoVOs = null;
 		//para cada item
-//		itensVO.forEach( item => {
+		for( var i = 0 ; i < itensVO.length; i++ ) {
+			item = itensVO[i];
+			console.log(`item ${item.id}` );
 //			// se id produto do item atual estiver na lista de id´s de produto
-//			if( idsProduto.includes (item.idProduto)){
+			if( idsProduto.includes (item.idProduto)){
+				console.log(`id Produto ${item.idProduto}`)
 //				//busca o produtoVO da tela
-//				let produtoVO = this.produtosVO.filter(produto => produto.idProduto== item.idProduto);
+				produtoVOs = this.produtosVO.filter(produto => produto.idProduto== item.idProduto);
 //				//seta idItem e valor total
-//				produtoVo.idItem = item.id;
-//				produtoVo.valorTotal = item.valorTotal;
-//			}
-//		});
+				produto = produtoVOs[0];
+				produto.idItem = item.id;
+				produtoVOs[0].valorTotal = item.valorTotal;
+			}
+		}
 		console.log('Fim trataItensVO');
 	}
 	
@@ -97,7 +103,8 @@ class ItemPedidoService {
 	
 	/** itens que tiveram suas quantidade e valor total alterados*/
 	getItensAlterados() {
-		let alterados = this.produtosVO.filter(item => ( item.valorTotal != undefined && item.valorTotal != 0 )); 
+		let alterados = this.produtosVO.filter(item => ( item.valorTotal != undefined && item.valorTotal != 0  ||
+				(item.id!= undefined ||  item.id!=null)  )); 
 		let retorno = alterados.map( (item) => { 
 			return { 
 				id: item.idItem,
