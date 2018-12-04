@@ -43,7 +43,13 @@ public class ItemPedidoService {
 				.reduce((valor1,valor2) -> valor1.add(valor2))
 				.orElse(BigDecimal.ZERO);
 		return totalItens;
-		
+	}
+	
+	public BigDecimal totalizaProdutos(List<ProdutoVO> listaProdutosVO) {
+		return listaProdutosVO.stream()
+			.map(produtoVO -> produtoVO.getValorTotal())
+			.reduce( (valor1, valor2) -> valor1.add(valor2))
+			.orElse(BigDecimal.ZERO);
 	}
 
 	private void excluiItensExistentes(List<ItemVO> itensVO) {
@@ -136,4 +142,5 @@ public class ItemPedidoService {
 	public void delete(Integer id) {
 		this.itemRepository.delete(id);
 	}
+
 }

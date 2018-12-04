@@ -52,9 +52,13 @@ public class ItemPedidoResource {
 	}
 	
 	@GetMapping("/inicio")
-	public ResponseEntity<List<ProdutoVO>> listaTodos() {
-		List<ProdutoVO> lista = this.itemService.listaItensIniciais();
-		return new ResponseEntity<List<ProdutoVO>>(lista, HttpStatus.OK);
+	public ResponseEntity<Map<String,Object>> listaTodos() {
+		List<ProdutoVO> listaProdutosVO = this.itemService.listaItensIniciais();
+		BigDecimal totalProdutos = this.itemService.totalizaProdutos(listaProdutosVO);
+		Map<String,Object> map = new HashMap<>();
+		map.put("itens", listaProdutosVO);
+		map.put("valorTotal", totalProdutos);
+		return new ResponseEntity(map, HttpStatus.OK);
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })

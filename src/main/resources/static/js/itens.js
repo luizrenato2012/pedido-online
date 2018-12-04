@@ -9,10 +9,6 @@ seleciona  = (id) => {
 	this.itemPedidoController.preencheSelecao(id);
 }
 
-//adicionaItem = (id) => {
-//	itemPedidoController.adicionaItem.bind(id);
-//}
-
 document.querySelector('#quant').addEventListener('change', itemPedidoController.calculaItem.bind(itemPedidoController));
 document.querySelector('#btnAdiciona').addEventListener('click', itemPedidoController.adicionaItem.bind(itemPedidoController));
 		

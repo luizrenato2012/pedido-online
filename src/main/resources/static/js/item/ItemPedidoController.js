@@ -17,8 +17,9 @@ class ItemPedidoController {
 	
 	iniciaItens() {
 		this.itemPedidoService.listaItens().then (
-				produtos => {
-					this.template(produtos);
+				resposta => {
+					this.template(resposta.itens);
+					this.preencheValorTotalCarrinho(resposta.valorTotal);
 				} , error => {
 					console.error(error);
 				}
@@ -68,18 +69,14 @@ class ItemPedidoController {
 	
 	calculaItem() {
 		let quantidade = parseFloat(this.quantidadeTxt.value);
-		if (quantidade==0) {
-			this.valorItemTxt.innerText="R$ 0,0";
-			return;
-		}
+		this.itemSelecionado.quantidade = quantidade;
 		
 		let valorUnitario = parseFloat(this.precoTxt.innerText.substring(3));
 		
-		this.itemSelecionado.quantidade = quantidade;
 		let total = (valorUnitario * quantidade);
 		this.itemSelecionado.valorTotal = total;
 		
-		this.valorItemTxt.innerText ="R$ " +(total.toFixed(2))+"";
+		this.valorItemTxt.innerText ="R$ " + (total==0  ? "0,00" : total.toFixed(2)+"");
 	}
 	
 	adicionaItem() {

@@ -12,9 +12,8 @@ class ItemPedidoService {
 			let r2 = reject;
 			this.httpHelper.get(urlListaItens).then (
 					sucesso => {
-					//	console.log('listaPedido ' + JSON.stringify(sucesso));
-					     this.produtosVO = sucesso;
-						resolve(this.produtosVO);
+					     this.produtosVO = sucesso.itens;
+						resolve(sucesso);
 					},
 					error => {
 						reject("Erro ao listar produtos " + error);
@@ -104,7 +103,7 @@ class ItemPedidoService {
 	/** itens que tiveram suas quantidade e valor total alterados*/
 	getItensAlterados() {
 		let alterados = this.produtosVO.filter(item => ( item.valorTotal != undefined && item.valorTotal != 0  ||
-				(item.id!= undefined ||  item.id!=null)  )); 
+				(item.idItem!= undefined ||  item.idItem!=null)  )); 
 		let retorno = alterados.map( (item) => { 
 			return { 
 				id: item.idItem,
