@@ -34,7 +34,27 @@ public interface ItemPedidoRepository extends JpaRepository<ItemPedido, Integer>
 				"order by p.nome\r\n",
 				nativeQuery=true
 	)
-	public List<ProdutoVO> listaInicio();
+	public List<ProdutoVO> listaItensInicio();
+	
+	@Query (value="select \r\n" + 
+					"	it.id_pedido id_pedido,\r\n" + 
+					"   it.id id_item,\r\n"+
+					"	row_number() over (order by descricao)  numero,\r\n" + 
+					"	p.id  id_produto,\r\n" + 
+					"	p.nome  nome,\r\n" + 
+					"	p.descricao  descricao,\r\n" + 
+					"	p.imagem  imagem,\r\n" + 
+					"	p.preco valorUnitario  ,\r\n" + 
+					"	it.quantidade \r\n" + 
+					"	it.valor_total \r\n" + 
+					"from pedido.produto p\r\n" + 
+					"inner join pedido.item_pedido it on it.id_produto=p.id \r\n" +
+					"left join pedido.pedido ped on it.id_pedido = ped.id \r\n"+
+				//	"where (ped.numero = $1) or (1=1) \r\n"+
+					"order by p.nome\r\n",
+					nativeQuery=true)
+	public List<ProdutoVO> listaItensCarrinho();
+	
 	
 	@Query("select item from ItemPedido item left join fetch item.pedido pedido where pedido.id = $1")
 	public List<ItemPedido> findByIdPedido(Integer idPedido);

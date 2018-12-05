@@ -8,8 +8,6 @@ class ItemPedidoService {
 	listaItens() {
 		let urlListaItens = "http://localhost:8080/api/itens/inicio";
 		return new Promise ( (resolve, reject) => {
-			let r1  =resolve;
-			let r2 = reject;
 			this.httpHelper.get(urlListaItens).then (
 					sucesso => {
 					     this.produtosVO = sucesso.itens;

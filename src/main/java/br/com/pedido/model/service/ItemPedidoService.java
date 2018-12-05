@@ -136,7 +136,11 @@ public class ItemPedidoService {
 	}
 	
 	public List<ProdutoVO> listaItensIniciais() {
-		return this.itemRepository.listaInicio();
+		return this.itemRepository.listaItensInicio();
+	}
+	
+	public List<ProdutoVO> listaItensCarrinho() {
+		return this.itemRepository.listaItensCarrinho();
 	}
 
 	public void delete(Integer id) {

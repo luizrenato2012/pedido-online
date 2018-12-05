@@ -61,6 +61,16 @@ public class ItemPedidoResource {
 		return new ResponseEntity(map, HttpStatus.OK);
 	}
 	
+	@GetMapping("/carrinho")
+	public ResponseEntity<Map<String,Object>> listaProdutosCarrinho() {
+		List<ProdutoVO> listaProdutosVO = this.itemService.listaItensIniciais();
+		BigDecimal totalProdutos = this.itemService.totalizaProdutos(listaProdutosVO);
+		Map<String,Object> map = new HashMap<>();
+		map.put("itens", listaProdutosVO);
+		map.put("valorTotal", totalProdutos);
+		return new ResponseEntity(map, HttpStatus.OK);
+	}
+	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@PostMapping
 	//DESCONSIDERANDO O ID DO ITEM (DEVE-SE CHEGAR E TRATAR NA VIEW P/ SEPARAR ID DO ITEM E DO PRODUTO
