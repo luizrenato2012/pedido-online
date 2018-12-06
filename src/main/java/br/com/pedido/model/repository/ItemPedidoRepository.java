@@ -45,10 +45,10 @@ public interface ItemPedidoRepository extends JpaRepository<ItemPedido, Integer>
 					"	p.descricao  descricao,\r\n" + 
 					"	p.imagem  imagem,\r\n" + 
 					"	p.preco valorUnitario  ,\r\n" + 
-					"	it.quantidade \r\n" + 
+					"	it.quantidade, \r\n" + 
 					"	it.valor_total \r\n" + 
-					"from pedido.produto p\r\n" + 
-					"inner join pedido.item_pedido it on it.id_produto=p.id \r\n" +
+					"from pedido.item_pedido it\r\n" + 
+					"inner join pedido.produto p on p.id = it.id_produto \r\n" +
 					"left join pedido.pedido ped on it.id_pedido = ped.id \r\n"+
 				//	"where (ped.numero = $1) or (1=1) \r\n"+
 					"order by p.nome\r\n",

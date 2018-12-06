@@ -63,7 +63,7 @@ public class ItemPedidoResource {
 	
 	@GetMapping("/carrinho")
 	public ResponseEntity<Map<String,Object>> listaProdutosCarrinho() {
-		List<ProdutoVO> listaProdutosVO = this.itemService.listaItensIniciais();
+		List<ProdutoVO> listaProdutosVO = this.itemService.listaItensCarrinho();
 		BigDecimal totalProdutos = this.itemService.totalizaProdutos(listaProdutosVO);
 		Map<String,Object> map = new HashMap<>();
 		map.put("itens", listaProdutosVO);

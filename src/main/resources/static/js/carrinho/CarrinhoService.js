@@ -1,5 +1,9 @@
 class CarrinhoService {
 	
+	constructor() {
+		this.httpHelper = new HttpHelper();
+	}
+	
 	listaItensCarrinho() {
 		let urlListaItens = "http://localhost:8080/api/itens/carrinho";
 		return new Promise ( (resolve, reject) => {

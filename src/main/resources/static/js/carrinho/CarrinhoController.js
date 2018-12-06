@@ -1,39 +1,46 @@
 class CarrinhoController {
 	
+	constructor() {
+		this.carrinhoService = new CarrinhoService();
+		this.totalCarrinhoTxt = document.querySelector("#txtTotalCarrinho");
+	}
 	
 	iniciaItens() {
-		this.itemPedidoService.listaItens().then (
+		this.carrinhoService.listaItensCarrinho().then (
 				resposta => {
 					this.template(resposta.itens);
 					this.preencheValorTotalCarrinho(resposta.valorTotal);
 				} , error => {
+					alert('Erro ao pesquisar itens do carrinho!');
 					console.error(error);
 				}
 		);
 	}
 	
-	template() {
+	template(itens) {
+		//TODO validar se realmene é necessario link p/ alterar as quantidades dos itens
 		let content = 
 			`<div class="table-wrapper-scroll-y2">  <!--scroll -->
            <div class="list-group">
-				${produtos.map ( item => 
-					`<a href="#" class="list-group-item comando"  data-toggle="modal" data-target="#myModal" onclick="seleciona(${item.idProduto})">
-			<input type="hidden" name="id_item" value="${item.idItem}"/>
+				${itens.map ( item => 
+					`<!-- <a href="#" class="list-group-item comando"  data-toggle="modal" data-target="#myModal" onclick="seleciona(${item.idProduto})"> -->
 					<table>
 						<tbody>
 							<tr>
-								<td rowspan="3"><img src="data:image/png;base64, ${item.imagem}" alt="sem imagem"	width=50 height=40></td>
-								<td><font size=2> ${item.nome} </font></td>
-							</tr>
-							<tr>
-								<td><font size=1> ${item.descricao} </font></td>
-							</tr>
-							<tr>
-								<td><font size=1 color="red"> ${item.valorUnitario} </font></td>
+								<td id="cel2">  <font size = 1 >  ${item.numero}  </font>   </td>
+								<td id="cel3"> <font size = 1 >  ${item.descricao}  </font> </td>
+								<td id="cel3"> <font size = 1 color = "red" >  ${item.valorUnitario}  </font>  </td>
+								<td id="cel3"> <font size = 1 color = "red" >  ${item.quantidade}  </font>  </td>
+								<td id="cel3"> <font size = 1 color = "red" >  ${item.valorTotal}  </font>  </td>
+								<td id="cel2"> 
+                      				<font size = 1 > 
+                        			<button class="btn" size="1"><img src="img/lixeira.png" alt="some text" width=20 height=20 ></button> 
+                      			</font>
+                    			</td>
 							</tr>
 						</tbody>
 					</table>
-				</a> 
+				<!-- </a> -->
 				
 				`).join('')}
 				</div>`;

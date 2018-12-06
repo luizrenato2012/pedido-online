@@ -26,7 +26,7 @@
       <div class="table-wrapper-scroll-y2" id="tab_itens_carrinho">  <!--scroll -->
            <div class="list-group">
 
-            <a href="#" class="list-group-item" data-toggle="modal" data-target="#myModal"> 
+         <!-- <a href="#" class="list-group-item" data-toggle="modal" data-target="#myModal"> 
               <table >              
                 <tbody>
                   <tr>
@@ -41,7 +41,7 @@
                   </tr> 
                 </tbody>
               </table>
-            </a>
+            </a> -->
 
           </div>
                
@@ -50,7 +50,7 @@
           <table>
               <tbody>
                 <tr>                     
-                <td id="cel1"> <a href="index.html" class="list-group-item" >
+                <td id="cel1"> <a href="index2.html" class="list-group-item" >
                     <div align = "center"> <font size = 2 color="green">  + ÍTENS  </font> </div> </a>
                 </td>             
                   <td id="cel1"> <a href="#" class="list-group-item" data-toggle="modal" data-target="#modalPlanoPagamento" >
@@ -60,7 +60,7 @@
               <tr>
                 <td id="cel" align="right">  <font size = 3 >  Total  </font> </td>
                 <td id="cel1" align="right"> 
-                  <font size = 3 > R$ 500.00  </font>
+                  <font size = 3 id="txtTotalCarrinho"></font>
                 </td>
               </tr>
 
@@ -87,7 +87,7 @@
           <img src="img/vidro.jpeg" alt="some text" width=120 height=90><br>
           <font size = 1 > Breve descrição sobre o produto 1 </font>
 
-          <table >
+          <table>
             <tbody>
               <tr>
                 <td id="cel">  <font size = 2 color = "red" >  R$ 300.00  </font>   </td>
@@ -145,8 +145,12 @@
   </div>  
 </div>   
 
-
 </body>
+<!-- <script type="text/javascript" src="js/item/Produto.js"></script> -->
+<script type="text/javascript" src="js/item/HttpHelper.js"></script>
+<script type="text/javascript" src="js/carrinho/CarrinhoService.js"></script>
+<script type="text/javascript" src="js/carrinho/CarrinhoController.js"></script>
+<script type="text/javascript" src="js/carrinho.js"></script>
 </html>
 
 
