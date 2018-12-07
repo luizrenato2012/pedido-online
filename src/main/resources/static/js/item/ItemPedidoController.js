@@ -12,6 +12,7 @@ class ItemPedidoController {
 		this.nomeLbl = document.querySelector("#lblNome");
 		this.descricaoLbl=  document.querySelector("#lblDescricao");
 		this.imagemImg=  document.querySelector("#imgItem");
+		
 		this.totalCarrinhoTxt = document.querySelector("#txtTotalCarrinho");
 	}
 	

@@ -2,6 +2,7 @@ class CarrinhoService {
 	
 	constructor() {
 		this.httpHelper = new HttpHelper();
+		this.produtosVO = [];
 	}
 	
 	listaItensCarrinho() {
@@ -16,7 +17,11 @@ class CarrinhoService {
 						reject("Erro ao listar itens do carrinho " + error);
 					}
 				);
-			
 		});
 	}
+	
+	getItemSelecionado(idProduto) {
+		return this.produtosVO.filter( item => item.idProduto==idProduto)[0];
+	}
+	
 }

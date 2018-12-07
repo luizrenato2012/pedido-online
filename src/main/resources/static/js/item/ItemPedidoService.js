@@ -32,8 +32,6 @@ class ItemPedidoService {
 		}
 		
 		return new Promise( (resolve, reject) => {
-			let resolve2 = resolve;
-			let reject2 = reject;
 			this.httpHelper.post(urlGrava, itensAnterados).then(
 					sucesso => {
 						console.log('resultado gravaItens: ' + sucesso);
@@ -77,22 +75,6 @@ class ItemPedidoService {
 		}
 		console.log('Fim trataItensVO');
 	}
-	
-	
-//	gravaItem(item) {
-//		let urlGravaItem = "http://localhost:8080/api/itens";
-//		return new Promise( (resolve, reject) => {
-//			this.httpHelper.post(urlGravaItem, item).then(
-//					sucesso => {
-//						//console.log('resultado gravaItem: ' + sucesso);
-//						resolve(sucesso);
-//					},
-//					erro => {
-//						reject("Erro ao gravar item:\n" + erro.status + " - " + erro.error);
-//					}
-//			);
-//		});
-//	}
 	
 	getItemSelecionado(idProduto) {
 		return this.produtosVO.filter( item => item.idProduto==idProduto)[0];
