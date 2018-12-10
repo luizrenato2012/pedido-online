@@ -47,13 +47,13 @@ class HttpHelper {
 	//TODO refatorar p/ usar o get parametrizado
 	delete(url) {
 		return new Promise ( (resolve, reject) => {
-			const OK = 200;
+			const STATUS_OK = [200, 201, 202];
 			const DONE = 4;
 			const xhr = new XMLHttpRequest();
 			xhr.open('DELETE', url);
 			xhr.onreadystatechange = () => {
 				if (xhr.readyState == DONE ) {
-					if(xhr.status == OK) {
+					if(STATUS_OK.includes(xhr.status)) {
 						resolve(JSON.parse(xhr.responseText));
 					} else {
 						reject({status :xhr.status, error : xhr.responseText});

@@ -99,10 +99,12 @@ class CarrinhoController {
 	excluiItem() {
 		this.carrinhoService.excluiItem(this.itemSelecionado.idItem).then(
 				resultado => {
+					$("#mdlConfirmaExclusao").modal("hide");
 					this.template(resultado.itens);
-					this.preencheValorTotalCarrinho(resultado.total);
+					this.preencheValorTotalCarrinho(resultado.valorCarrinho);
 				},
 				error => {
+					$("#mdlConfirmaExclusao").modal("hide");
 					console.log(error);
 					alert(error);
 				}

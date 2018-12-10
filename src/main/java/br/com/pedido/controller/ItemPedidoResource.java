@@ -5,16 +5,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.pedido.model.bean.ItemPedido;
@@ -35,6 +36,8 @@ public class ItemPedidoResource {
 	
 	@Autowired
 	private PedidoRepository pedidoRepository;
+	
+	private Logger log = Logger.getLogger(this.getClass().getSimpleName());
 	
 	@GetMapping("/teste")
 	public ResponseEntity<ItemPedido> teste() {
@@ -83,8 +86,10 @@ public class ItemPedidoResource {
 		return new ResponseEntity(retorno, HttpStatus.ACCEPTED);
 	}
 	
-	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	public ResponseEntity<Map<String,Object>> exclui( @RequestParam Integer id) {
+	@DeleteMapping
+	@RequestMapping(value="/{id}")
+	public ResponseEntity<Map<String,Object>> exclui( @PathVariable Integer id) {
+		this.log.info("Excluindo item ["+ id +"]");
 		this.itemService.delete(id);
 		BigDecimal totalCarrinho = this.itemService.totalizaItens();
 		List<ProdutoVO> itens = this.itemService.listaItensCarrinho();
