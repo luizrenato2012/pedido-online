@@ -24,4 +24,20 @@ class CarrinhoService {
 		return this.produtosVO.filter( item => item.idProduto==idProduto)[0];
 	}
 	
+	excluiItem(id) {
+		let urlItens = "http://localhost:8080/api/itens/"+id;
+		return new Promise ( (resolve, reject) => {
+			this.httpHelper.delete(urlItens).then (
+					sucesso => {
+					     this.produtosVO = sucesso.itens;
+						resolve(sucesso);
+					},
+					error => {
+						console.error(error);
+						reject("Erro ao excluir itens do carrinho!" );
+					}
+				);
+		});
+				
+	}
 }

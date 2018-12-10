@@ -39,7 +39,7 @@ public interface ItemPedidoRepository extends JpaRepository<ItemPedido, Integer>
 	@Query (value="select \r\n" + 
 					"	it.id_pedido id_pedido,\r\n" + 
 					"   it.id id_item,\r\n"+
-					"	row_number() over (order by descricao)  numero,\r\n" + 
+					"	row_number() over (order by nome)  numero,\r\n" + 
 					"	p.id  id_produto,\r\n" + 
 					"	p.nome  nome,\r\n" + 
 					"	p.descricao  descricao,\r\n" + 
@@ -58,5 +58,7 @@ public interface ItemPedidoRepository extends JpaRepository<ItemPedido, Integer>
 	
 	@Query("select item from ItemPedido item left join fetch item.pedido pedido where pedido.id = $1")
 	public List<ItemPedido> findByIdPedido(Integer idPedido);
+	
+	public void deleteById(Integer id);
 }
 

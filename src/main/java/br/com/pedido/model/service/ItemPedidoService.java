@@ -45,6 +45,15 @@ public class ItemPedidoService {
 		return totalItens;
 	}
 	
+	public BigDecimal totalizaItens() {
+		List<ItemPedido> itens = this.itemRepository.findAll(); //TODO lista pelo id do pedido
+		BigDecimal totalItens = itens.stream()
+				.map(item -> item.getValorTotal())
+				.reduce((valor1,valor2) -> valor1.add(valor2))
+				.orElse(BigDecimal.ZERO);
+		return totalItens;
+	}
+	
 	public BigDecimal totalizaProdutos(List<ProdutoVO> listaProdutosVO) {
 		return listaProdutosVO.stream()
 			.map(produtoVO -> produtoVO.getValorTotal())

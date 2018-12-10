@@ -2,11 +2,15 @@ carrinhoController = new CarrinhoController();
 carrinhoController.iniciaItens();
 
 seleciona  = (id) => {
-	this.carrinhoController.preencheSelecao(id);
+	this.carrinhoController.seleciona(id);
 }
 
 exclui = (id) => {
 	this.carrinhoController.excluiItem(id);
+}
+
+exibeExclusao = (id) => {
+	this.carrinhoController.exibeExclusao(id);
 }
 
 aumentaQuantidade = (quant) => {
@@ -22,4 +26,7 @@ aumentaQuantidade = (quant) => {
 }
 
 document.querySelector('#quant').addEventListener('change', carrinhoController.calculaItem.bind(carrinhoController));
-//document.querySelector('#btnExclui').addEventListener('click', carrinhoController.excluiItem.bind(carrinhoController));
+document.querySelector('#btn_confirma_exclusao').addEventListener('click', carrinhoController.excluiItem.bind(carrinhoController));
+document.querySelector('#btn_cancela_exclusao').addEventListener('click', carrinhoController.fechaExclusao.bind(carrinhoController));
+
+$('#mdlConfirmaExclusao').on('hidden.bs.modal', e =>{ carrinhoController.setExibeDialog(true); });

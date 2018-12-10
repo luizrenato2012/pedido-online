@@ -12,6 +12,8 @@ class CarrinhoController {
 		this.nomeLbl = document.querySelector("#lblNome");
 		this.descricaoLbl=  document.querySelector("#lblDescricao");
 		this.imagemImg=  document.querySelector("#imgItem");
+		
+		this.exibeDialog = true;
 	}
 	
 	iniciaItens() {
@@ -32,16 +34,16 @@ class CarrinhoController {
 			`<div class="table-wrapper-scroll-y2">  <!--scroll -->
            <div class="list-group">
 				${itens.map ( item => 
-					`<a href="#" class="list-group-item comando"  data-toggle="modal" data-target="#myModal" onclick="seleciona(${item.idProduto})"> 
+					`<a href="#" class="list-group-item comando"  onclick="seleciona(${item.idProduto})"> 
 					<table>
 						<tbody>
 							<tr>
-								<td id="cel2">  <font size = 1 >  ${item.numero}  </font>   </td>
+								<td id="cel2"> <font size = 1 >  ${item.numero}  </font>   </td>
 								<td id="cel3"> <font size = 1 >  ${item.descricao}  </font> </td>
-								<td id="cel3"> <font size = 1 color = "red" >  ${item.valorTotal}  </font>  </td>
+								<td id="cel3"> <font size = 1 color = "red">  ${item.valorTotal}  </font>  </td>
 								<td id="cel2"> 
                       				<font size = 1 > 
-                        			<button class="btn" size="1" onclick="exclui(${item.idProduto})"><img src="img/lixeira.png" alt="some text" width=20 height=20></button> 
+                        			<button class="btn" size="1" onclick="exibeExclusao(${item.idProduto})"><img src="img/lixeira.png" alt="some text" width=20 height=20></button> 
                       			</font>
                     			</td>
 							</tr>
@@ -59,7 +61,10 @@ class CarrinhoController {
 		this.totalCarrinhoTxt.innerHTML=valor.toLocaleString('pt-BR', {style:'currency', currency: 'BRL'}) ;
 	}
 	
-	preencheSelecao (idProduto) {
+	seleciona (idProduto) {
+		if (this.exibeDialog==false) {
+			return;
+		}
 		this.itemSelecionado = this.carrinhoService.getItemSelecionado(idProduto); //alterarado campo de chave p/ id produto
 //		console.log('ItemPedidoController preenche/selecao ' + this.itemSelecionado);
 		this.nomeLbl.innerHTML=this.itemSelecionado.nome;
@@ -69,6 +74,7 @@ class CarrinhoController {
 		this.precoTxt.innerText= 'R$ ' + parseFloat(this.itemSelecionado.valorUnitario);
 		this.quantidadeTxt.value = this.itemSelecionado.quantidade;
 		this.valorItemTxt.innerText= 'R$ ' + this.itemSelecionado.valorTotal;
+		$("#mdlDetalhe").modal("show");
 		
 	}
 	
@@ -84,8 +90,33 @@ class CarrinhoController {
 		this.valorItemTxt.innerText ="R$ " + (total==0  ? "0,00" : total.toFixed(2)+"");
 	}
 	
-	excluiItem(id) {
-		alert(`Exclui item ${id}`);
-		$("myModal").modal("hide");
+	exibeExclusao(idProduto) {
+		this.exibeDialog=false;
+		$("#mdlConfirmaExclusao").modal("show");
+		this.itemSelecionado = this.carrinhoService.getItemSelecionado(idProduto); 
 	}
+	
+	excluiItem() {
+		this.carrinhoService.excluiItem(this.itemSelecionado.idItem).then(
+				resultado => {
+					this.template(resultado.itens);
+					this.preencheValorTotalCarrinho(resultado.total);
+				},
+				error => {
+					console.log(error);
+					alert(error);
+				}
+		);
+	}
+	
+	fechaExclusao() {
+		this.exibeDialog=true;
+		$("#mdlConfirmaExclusao").modal("hide");
+	}
+	
+	setExibeDialog(flag) {
+		this.exibeDialog = flag;
+	}
+	
+	
 }

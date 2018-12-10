@@ -1,22 +1,17 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 
 
 <head>
-<title>Catálogo de Produtos</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/javascript.js"></script>
-<link rel="stylesheet" type="text/css" href="css/style.css">
-
+	<title>Catálogo de Produtos</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/javascript.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
 <body>
@@ -31,7 +26,6 @@
 		<div class="table-wrapper-scroll-y2" id="tab_itens_carrinho">
 			<!--scroll -->
 			<div class="list-group"></div>
-
 		</div>
 
 		<table>
@@ -42,8 +36,7 @@
 								<font size=2 color="green"> + ÍTENS </font>
 							</div>
 					</a></td>
-					<td id="cel1"><a href="#" class="list-group-item"
-						data-toggle="modal" data-target="#modalPlanoPagamento">
+					<td id="cel1"><a href="#" class="list-group-item" data-toggle="modal" data-target="#modalPlanoPagamento">
 							<div align="center">
 								<font size=2 color="green"> FINALIZAR </font>
 							</div>
@@ -64,7 +57,7 @@
 	</div>
 
 	<!-- Modal -->
-	<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal fade" id="mdlDetalhe" role="dialog">
 		<div class="modal-dialog">
 			<!-- Modal content-->
 			<div class="modal-content" align="center">
@@ -83,27 +76,21 @@
 						<table>
 							<tbody>
 								<tr>
-									<td id="cel"><font size=2 color="red" id="lblPreco">
-									</font></td>
+									<td id="cel"><font size=2 color="red" id="lblPreco"> </font></td>
 									<td id="cel1">
 										<div data-app="product.quantity" id="quantidade">
-											<span id="span_erro_carrinho" class="blocoAlerta"
-												style="display: none;">Selecione uma opção produto</span> <input
-												type="button" id="plus" value='-'
-												onclick="aumentaQuantidade(-1)" /> <input id="quant"
-												name="quant" id="quant" class="text"
-												style="text-align: center" size="1" type="text" value="1"
-												maxlength="5" onclick="aumentaQuantidade(1)" "/> <input
-												type="button" id="minus" value='+'
-												onclick="aumentaQuantidade(1)">
-										</div> </font>
+											<span id="span_erro_carrinho" class="blocoAlerta" style="display: none;">Selecione uma opção produto</span> 
+												<input type="button" id="plus" value='-' onclick="aumentaQuantidade(-1)" /> 
+												<input id="quant" name="quant" id="quant" class="text" style="text-align: center" size="1" type="text" value="1"
+													maxlength="5" onclick="aumentaQuantidade(1)"/> 
+												<input type="button" id="minus" value='+' onclick="aumentaQuantidade(1)">
+										</div>
 									</td>
 								</tr>
 								<tr>
 									<td id="cel"><font size=2 color="red" id="lblValorTotal"></font>
 									</td>
-									<td id="cel1"><a href="#" class="list-group-item"
-										data-toggle="modal" data-target="#myModal">
+									<td id="cel1"><a href="#" class="list-group-item" data-toggle="modal" data-target="#mdlDetalhe">
 											<div align="center">
 												<img src="img/adicionar.jpg" alt="some text" width=15 height=15>
 											</div>
@@ -118,7 +105,7 @@
 	</div>
 
 
-	<!-- Modal -->
+	<!-- Modal plano de pagamento-->
 	<div class="modal fade" id="modalPlanoPagamento" role="dialog">
 		<div class="modal-dialog">
 			<!-- Modal content-->
@@ -136,6 +123,28 @@
 						</select> <br> <a href="selecionaEndereco.html">
 							<button class="button button1">OK</button>
 						</a>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- modal exclusao -->
+	<div class="modal fade" id="mdlConfirmaExclusao" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content" align="center">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h5 class="modal-title">CONFIRMA EXCLUSÃO DO ITEM?</h5>
+				</div>
+				<div class="modal-body">
+					<div class="wrap-input3 input3-select">
+
+						<label for="sel1"></label> 	
+						<button class="button button1" id="btn_cancela_exclusao">Cancela</button>
+						<button class="button button1" id="btn_confirma_exclusao">OK</button>
 
 					</div>
 				</div>
