@@ -82,7 +82,7 @@ class ItemPedidoController {
 	
 	adicionaItem() {
 		console.log(`adiciona item ${this.itemSelecionado.id} - total ${this.itemSelecionado.valorTotal}`);
-		//TODO troca para gravaItens
+		
 		this.itemPedidoService.gravaItens(this.itemSelecionado).then(
 			resultado => {
 				this.preencheValorTotalCarrinho(resultado.valorCarrinho);

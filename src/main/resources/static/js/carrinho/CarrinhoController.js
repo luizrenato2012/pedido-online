@@ -120,5 +120,17 @@ class CarrinhoController {
 		this.exibeDialog = flag;
 	}
 	
+	aumentaQuantidade (quant) {
+//		let quantTxt = document.getElementById("quant");
+	    var value = parseInt(this.quantidadeTxt.value);
+	    value+=quant;
+	    if(value < 1){
+	    	quantTxt.value = 0;
+	    } else{
+	    	quantTxt.value = value;
+	    }
+	    this.calculaItem();
+	}
+	
 	
 }

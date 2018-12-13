@@ -13,20 +13,23 @@ exibeExclusao = (id) => {
 	this.carrinhoController.exibeExclusao(id);
 }
 
-aumentaQuantidade = (quant) => {
-	let quantTxt = document.getElementById("quant");
-    var value = parseInt(quantTxt.value);
-    value+=quant;
-    if(value < 1){
-    	quantTxt.value = 0;
-    } else{
-    	quantTxt.value = value;
-    }
-    itemPedidoController.calculaItem();
-}
+//aumentaQuantidade =(quant) => {
+//	let quantTxt = document.getElementById("quant");
+//    var value = parseInt(quantTxt.value);
+//    value+=quant;
+//    if(value < 1){
+//    	quantTxt.value = 0;
+//    } else{
+//    	quantTxt.value = value;
+//    }
+//    carrinhoController.calculaItem();
+//}
 
-document.querySelector('#quant').addEventListener('change', carrinhoController.calculaItem.bind(carrinhoController));
+document.querySelector('#quant').addEventListener('change', carrinhoController.aumentaQuantidade.bind(carrinhoController));
+document.querySelector('#quant').addEventListener('click', carrinhoController.aumentaQuantidade.bind(carrinhoController));
+
 document.querySelector('#btn_confirma_exclusao').addEventListener('click', carrinhoController.excluiItem.bind(carrinhoController));
 document.querySelector('#btn_cancela_exclusao').addEventListener('click', carrinhoController.fechaExclusao.bind(carrinhoController));
+
 
 $('#mdlConfirmaExclusao').on('hidden.bs.modal', e =>{ carrinhoController.setExibeDialog(true); });
