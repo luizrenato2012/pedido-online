@@ -33,6 +33,13 @@ document.querySelector('#btnMinus').addEventListener('click', (evt) => {
 	carrinhoController.aumentaQuantidade.bind(carrinhoController)(-1);
 });
 
+document.querySelector("#edtQuant").addEventListener('change', (evt) => {
+	let valorText= evt.srcElement.value;
+	if (valorText==undefined || valorText==null || valorText=='') {
+		return;
+	}
+	carrinhoController.aumentaQuantidade.bind(carrinhoController)(parseFloat(valorText));
+});
 
 document.querySelector('#btn_confirma_exclusao').addEventListener('click', carrinhoController.excluiItem.bind(carrinhoController));
 document.querySelector('#btn_cancela_exclusao').addEventListener('click', carrinhoController.fechaExclusao.bind(carrinhoController));

@@ -6,7 +6,7 @@ class CarrinhoController {
 		this.itemSelecionado = {};
 		
 		this.precoTxt = document.querySelector("#lblPreco");
-		this.quantidadeTxt = document.querySelector("#quant");
+		this.quantidadeTxt = document.querySelector("#edtQuant");
 		this.valorItemTxt = document.querySelector("#lblValorTotal");
 		
 		this.nomeLbl = document.querySelector("#lblNome");
