@@ -125,9 +125,9 @@ class CarrinhoController {
 	    var value = parseInt(this.quantidadeTxt.value);
 	    value+=quant;
 	    if(value < 1){
-	    	quantTxt.value = 0;
+	    	this.quantidadeTxt.value = 0;
 	    } else{
-	    	quantTxt.value = value;
+	    	this.quantidadeTxt.value = value;
 	    }
 	    this.calculaItem();
 	}
