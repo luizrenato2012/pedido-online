@@ -10,7 +10,8 @@ seleciona  = (id) => {
 }
 
 document.querySelector('#quant').addEventListener('change', itemPedidoController.calculaItem.bind(itemPedidoController));
-document.querySelector('#btnAdiciona').addEventListener('click', itemPedidoController.adicionaItem.bind(itemPedidoController));
+document.querySelector('#btnAdiciona').addEventListener('click', itemPedidoController.adicionaItens.bind(itemPedidoController));
+document.querySelector('#lnkCarrinho').addEventListener('click', itemPedidoController.adicionaItens.bind(itemPedidoController));
 		
 aumentaQuantidade = (quant) => {
 	let quantTxt = document.getElementById("quant");

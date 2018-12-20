@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import br.com.pedido.controller.ItemVO;
 import br.com.pedido.controller.ProdutoVO;
 import br.com.pedido.model.bean.ItemPedido;
+import br.com.pedido.model.bean.Pedido;
 import br.com.pedido.model.repository.ItemPedidoRepository;
 import br.com.pedido.model.repository.ProdutoRepository;
 
@@ -35,6 +36,17 @@ public class ItemPedidoService {
 		this.itemRepository.save(itens);
 		itensVO = this.converteListaItens(itens);
 		return itensVO;
+	}
+	
+	@Transactional
+	public List<ItemPedido>gravaItens(List<ItemVO> itensVO, Pedido pedido) {
+		this.excluiItensExistentes(itensVO);
+		
+		List<ItemPedido> itens = this.converteListaVO(itensVO);
+		itens.forEach(item -> item.setPedido(pedido));
+		
+		this.itemRepository.save(itens);
+		return itens;
 	}
 	
 	public BigDecimal totalizaItens(List<ItemVO> itens) {

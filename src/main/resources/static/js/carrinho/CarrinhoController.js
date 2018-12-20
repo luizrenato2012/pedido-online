@@ -121,7 +121,6 @@ class CarrinhoController {
 	}
 	
 	aumentaQuantidade (quant) {
-//		let quantTxt = document.getElementById("quant");
 	    var value = parseInt(this.quantidadeTxt.value);
 	    value+=quant;
 	    if(value < 1){

@@ -80,10 +80,10 @@ class ItemPedidoController {
 		this.valorItemTxt.innerText ="R$ " + (total==0  ? "0,00" : total.toFixed(2)+"");
 	}
 	
-	adicionaItem() {
+	adicionaItens() {
 		console.log(`adiciona item ${this.itemSelecionado.id} - total ${this.itemSelecionado.valorTotal}`);
 		
-		this.itemPedidoService.gravaItens(this.itemSelecionado).then(
+		this.itemPedidoService.gravaItens().then(
 			resultado => {
 				this.preencheValorTotalCarrinho(resultado.valorCarrinho);
 			},
@@ -99,4 +99,7 @@ class ItemPedidoController {
 		this.totalCarrinhoTxt.innerHTML= "R$ " + valor.toFixed(2) ;
 	}
 	
-}
+	vaiProCarrinho() {
+		console.log('Vai pro carrinho');
+	}
+	}

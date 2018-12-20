@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,6 +38,14 @@ public class Pedido {
 	@OneToMany( cascade= {CascadeType.PERSIST,CascadeType.REMOVE})
 	@JoinColumn(name="id_pedido")
 	private List<ItemPedido> itens;
+	
+	@Column(name="id_situacao")
+	@Enumerated(EnumType.ORDINAL)
+	private SituacaoPedido situacao;
+	
+	public Pedido() {
+		this.situacao = SituacaoPedido.NOVO;
+	}
 
 	public Integer getId() {
 		return id;
@@ -75,6 +85,14 @@ public class Pedido {
 
 	public void setItens(List<ItemPedido> itens) {
 		this.itens = itens;
+	}
+	
+	public SituacaoPedido getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(SituacaoPedido situacao) {
+		this.situacao = situacao;
 	}
 
 	@Override

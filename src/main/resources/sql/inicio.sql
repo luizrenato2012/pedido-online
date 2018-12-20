@@ -8,6 +8,7 @@ CREATE TABLE pedido.produto
   visivel boolean,
   imagem bytea,
   preco numeric(8,2),
+  quantidade_estoque numeric(8,2)
   CONSTRAINT pk_produto PRIMARY KEY (id)
 )
 WITH (
@@ -93,7 +94,8 @@ CREATE TABLE pedido.item_pedido
   valor_unitario numeric(8,2),
   quantidade integer,
   valor_total numeric(8,2),
-  id_pedido integer
+  id_pedido ,
+  id_situacao integer
 )
 WITH (
   OIDS=FALSE

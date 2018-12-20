@@ -37,6 +37,8 @@ public class Produto implements Serializable{
 	
 	private BigDecimal preco;
 	
+	private BigDecimal quantidadeEstoque;
+	
 
 	public Integer getId() {
 		return id;
@@ -100,6 +102,14 @@ public class Produto implements Serializable{
 
 	public void setPreco(BigDecimal preco) {
 		this.preco = preco;
+	}
+	
+	public BigDecimal getQuantidadeEstoque() {
+		return quantidadeEstoque;
+	}
+
+	public void setQuantidadeEstoque(BigDecimal quantidadeEstoque) {
+		this.quantidadeEstoque = quantidadeEstoque;
 	}
 
 	@Override

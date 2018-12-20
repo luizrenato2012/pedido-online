@@ -83,7 +83,7 @@ class ItemPedidoService {
 	/** itens que tiveram suas quantidade e valor total alterados*/
 	getItensAlterados() {
 		let alterados = this.produtosVO.filter(item => ( item.valorTotal != undefined && item.valorTotal != 0  ||
-				(item.idItem!= undefined ||  item.idItem!=null)  )); 
+				(item.idItem!= undefined ||  item.idItem!=null) )); 
 		let retorno = alterados.map( (item) => { 
 			return { 
 				id: item.idItem,
@@ -95,6 +95,34 @@ class ItemPedidoService {
 			}  
 		});
 		return retorno;
+	}
+	
+	vaiProCarrinho() {
+		let alterados = getItensAlterados();
+		let urlGravaCarrinho = "http://localhost:8080/api/pedido";
+		let itensAnterados = this.getItensAlterados();
+		
+		if (itensAnterados===undefined || itensAnterados.length==0) {
+			return new Promisse( (resolve, reject) => {
+				reject("Lista vazia");
+			});
+		}
+		
+		return new Promise( (resolve, reject) => {
+			this.httpHelper.post(urlGrava, itensAnterados).then(
+					sucesso => {
+						console.log('resultado gravaItens: ' + sucesso);
+						// TODO tratar lista de produtos VO pra que tenham os ID vindos da lista retornada pelo servidor
+						this.trataItensVO(sucesso.itens);
+						this.teste();
+						resolve(sucesso); 
+					},
+					erro => {
+						reject("Erro ao gravar itens:\n" + erro.status + " - " + erro.error);
+					}
+			);
+		});
+		
 	}
 	
 	
