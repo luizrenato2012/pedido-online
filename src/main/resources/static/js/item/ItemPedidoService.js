@@ -36,8 +36,8 @@ class ItemPedidoService {
 					sucesso => {
 						console.log('resultado gravaItens: ' + sucesso);
 						// TODO tratar lista de produtos VO pra que tenham os ID vindos da lista retornada pelo servidor
-						this.trataItensVO(sucesso.itens);
-						this.teste();
+//						this.trataItensVO(sucesso.itens);
+//						this.teste();
 						resolve(sucesso); 
 					},
 					erro => {

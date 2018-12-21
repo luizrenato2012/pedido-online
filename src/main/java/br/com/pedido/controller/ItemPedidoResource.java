@@ -78,10 +78,10 @@ public class ItemPedidoResource {
 	@PostMapping
 	//DESCONSIDERANDO O ID DO ITEM (DEVE-SE CHEGAR E TRATAR NA VIEW P/ SEPARAR ID DO ITEM E DO PRODUTO
 	public ResponseEntity<Map<String,Object>> adicionaItens( @RequestBody List<ItemVO> itensVO) {
-		List<ItemVO>itens = this.itemService.gravaItens(itensVO);
+//		List<ItemVO>itens = this.itemService.gravaItens(itensVO);
 		BigDecimal totalCarrinho = this.itemService.totalizaItens(itensVO);
 		Map<String,Object> retorno = new HashMap<>();
-		retorno.put("itens", itens);
+//		retorno.put("itens", itens);
 		retorno.put("valorCarrinho", totalCarrinho);
 		return new ResponseEntity(retorno, HttpStatus.ACCEPTED);
 	}
