@@ -21,8 +21,8 @@ class ItemPedidoService {
 		});
 	}
 	
-	gravaItens() {
-		let urlGrava = "http://localhost:8080/api/itens";
+	totalizaItens() {
+		let urlGrava = "http://localhost:8080/api/itens/total";
 		let itensAnterados = this.getItensAlterados();
 		
 		if (itensAnterados===undefined || itensAnterados.length==0) {
@@ -37,7 +37,6 @@ class ItemPedidoService {
 						console.log('resultado gravaItens: ' + sucesso);
 						// TODO tratar lista de produtos VO pra que tenham os ID vindos da lista retornada pelo servidor
 //						this.trataItensVO(sucesso.itens);
-//						this.teste();
 						resolve(sucesso); 
 					},
 					erro => {
@@ -45,10 +44,6 @@ class ItemPedidoService {
 					}
 			);
 		});
-	}
-	
-	teste () {
-		console.log('Teste antes de resolve');
 	}
 	
 	/** itera por todos os itensVO e seta idItem daqueles que tem o mesmo idProduto */

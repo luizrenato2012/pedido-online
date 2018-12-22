@@ -9,18 +9,9 @@ seleciona  = (id) => {
 	this.itemPedidoController.preencheSelecao(id);
 }
 
-document.querySelector('#quant').addEventListener('change', itemPedidoController.calculaItem.bind(itemPedidoController));
 document.querySelector('#btnAdiciona').addEventListener('click', itemPedidoController.adicionaItens.bind(itemPedidoController));
-document.querySelector('#lnkCarrinho').addEventListener('click', itemPedidoController.adicionaItens.bind(itemPedidoController));
-		
-aumentaQuantidade = (quant) => {
-	let quantTxt = document.getElementById("quant");
-    var value = parseInt(quantTxt.value);
-    value+=quant;
-    if(value < 1){
-    	quantTxt.value = 0;
-    } else{
-    	quantTxt.value = value;
-    }
-    itemPedidoController.calculaItem();
-}
+document.querySelector('#btnPlus').addEventListener('click', itemPedidoController.aumentaQuantidade.bind(itemPedidoController));
+document.querySelector('#btnMinus').addEventListener('click', itemPedidoController.diminuiQuantidade.bind(itemPedidoController));
+
+document.querySelector('#edtQuantidade').addEventListener('change', itemPedidoController.calculaItem.bind(itemPedidoController));
+document.querySelector('#lnkCarrinho').addEventListener('click', itemPedidoController.vaiProCarrinho.bind(itemPedidoController));

@@ -31,7 +31,7 @@
 		<!--Div do scroll -->
 
 
-		<a href="carrinho2.html" class="list-group-item"> <!--Sera outro modal -->
+		<a href="carrinho2.html" class="list-group-item" id="lnkCarrinho"> <!--Sera outro modal -->
 			<table bgcolor="grey">
 				<tbody>
 					<tr>
@@ -73,13 +73,11 @@
 									</td>
 									<td id="cel1">
 										<div data-app="product.quantity" id="quantidade">
-											<span id="span_erro_carrinho" class="blocoAlerta"
-												style="display: none;">Selecione uma opção produto</span> <input
-												type="button" id="plus" value='-' onclick="aumentaQuantidade(-1)" />
-											<input id="quant" name="quant" id="quant" class="text"
-												style="text-align: center" size="1" type="text" value="0"
-												maxlength="5" /> <input type="button" id="minus" value='+'
-												onclick="aumentaQuantidade(1)">
+											<span id="span_erro_carrinho" class="blocoAlerta" style="display: none;">Selecione uma opção produto</span> 
+											<input type="button" id="btnMinus" value='-' />
+											<input type="text" id="edtQuantidade" name="edtQuantidade" class="text" style="text-align: center" size="1"  value="0"
+													maxlength="5" /> 
+											<input type="button" id="btnPlus" value='+'/>
 										</div> </font>
 									</td>
 								</tr>

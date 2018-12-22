@@ -6,7 +6,7 @@ class ItemPedidoController {
 		this.itemSelecionado = {};
 		
 		this.precoTxt = document.querySelector("#lblPreco");
-		this.quantidadeTxt = document.querySelector("#quant");
+		this.quantidadeTxt = document.querySelector("#edtQuantidade");
 		this.valorItemTxt = document.querySelector("#lblValorTotal");
 		
 		this.nomeLbl = document.querySelector("#lblNome");
@@ -83,7 +83,7 @@ class ItemPedidoController {
 	adicionaItens() {
 		console.log(`adiciona item ${this.itemSelecionado.id} - total ${this.itemSelecionado.valorTotal}`);
 		
-		this.itemPedidoService.gravaItens().then(
+		this.itemPedidoService.totalizaItens().then(
 			resultado => {
 				this.preencheValorTotalCarrinho(resultado.valorCarrinho);
 			},
@@ -99,7 +99,28 @@ class ItemPedidoController {
 		this.totalCarrinhoTxt.innerHTML= "R$ " + valor.toFixed(2) ;
 	}
 	
-	vaiProCarrinho() {
-		console.log('Vai pro carrinho');
+	aumentaQuantidade () {
+		this.mudaQuantidade(1);
 	}
+	
+	diminuiQuantidade() {
+		this.mudaQuantidade(-1);
 	}
+	
+	mudaQuantidade (quantidade) {
+	    let value = parseInt(this.quantidadeTxt.value);
+	    value+=quantidade;
+	    this.quantidadeTxt.value = value < 1 ? 0 : value;
+//	    if(value < 1){
+//	    	quantTxt.value = 0;
+//	    } else{
+//	    	quantTxt.value = value;
+//	    }
+	    itemPedidoController.calculaItem();
+	}
+	
+	vaiProCarrinho () {
+		this.adicionaItens();
+		console.log('vai pro carrinho');
+	}
+}

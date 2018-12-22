@@ -27,6 +27,7 @@ public class PedidoResource {
 	@Autowired
 	private PedidoService pedidoService;
 	
+	@Autowired
 	private ItemPedidoService itemService;
 	
 	public ResponseEntity<Map<String,Object>> adicionaItens( @RequestBody List<ItemVO> itensVO) {
