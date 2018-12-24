@@ -111,16 +111,11 @@ class ItemPedidoController {
 	    let value = parseInt(this.quantidadeTxt.value);
 	    value+=quantidade;
 	    this.quantidadeTxt.value = value < 1 ? 0 : value;
-//	    if(value < 1){
-//	    	quantTxt.value = 0;
-//	    } else{
-//	    	quantTxt.value = value;
-//	    }
 	    itemPedidoController.calculaItem();
 	}
 	
 	vaiProCarrinho () {
-		this.adicionaItens();
+//		this.adicionaItens();
 		console.log('vai pro carrinho');
 	}
 }
