@@ -32,7 +32,7 @@ public class ItemPedidoService {
 	public List<ItemVO> gravaItens(List<ItemVO> itensVO) {
 		this.excluiItensExistentes(itensVO);
 		
-		List<ItemPedido> itens = this.converteListaVO(itensVO);
+		List<ItemPedido> itens = this.converteListaVOValidos(itensVO);
 		this.itemRepository.save(itens);
 		itensVO = this.converteListaItens(itens);
 		return itensVO;
@@ -42,7 +42,7 @@ public class ItemPedidoService {
 	public List<ItemPedido>gravaItens(List<ItemVO> itensVO, Pedido pedido) {
 		this.excluiItensExistentes(itensVO);
 		
-		List<ItemPedido> itens = this.converteListaVO(itensVO);
+		List<ItemPedido> itens = this.converteListaVOValidos(itensVO);
 		itens.forEach(item -> item.setPedido(pedido));
 		
 		this.itemRepository.save(itens);
@@ -118,9 +118,17 @@ public class ItemPedidoService {
 		return listaIds;
 	}
 
-	private List<ItemPedido> converteListaVO(List<ItemVO> itensVO) {
+	/** retorna itens com quantidades validas */
+	private List<ItemPedido> converteListaVOValidos(List<ItemVO> itensVO) {
 		List<ItemPedido> itens = itensVO.stream()
 					.filter(item -> item.getQuantidade() > 0)
+					.map(item -> this.converteVO(item) )
+					.collect(Collectors.toList());
+		return itens;
+	}
+	
+	public List<ItemPedido> converteListaVO(List<ItemVO> itensVO) {
+		List<ItemPedido> itens = itensVO.stream()
 					.map(item -> this.converteVO(item) )
 					.collect(Collectors.toList());
 		return itens;
@@ -152,6 +160,13 @@ public class ItemPedidoService {
 		itemVO.setValorUnitario(item.getValorUnitario());
 		return itemVO;
 	}
+	
+	public void ajustaValoresTotais(List<ItemVO> itensVO) {
+		itensVO.forEach(item -> 
+			item.setValorTotal(  
+					item.getValorUnitario().multiply( BigDecimal.valueOf(item.getQuantidade()))));
+	}
+	
 	public ItemPedido save(ItemPedido item) {
 		return this.itemRepository.save(item);
 	}

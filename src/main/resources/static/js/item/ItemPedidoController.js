@@ -115,7 +115,7 @@ class ItemPedidoController {
 	}
 	
 	vaiProCarrinho () {
-//		this.adicionaItens();
+		this.adicionaItens();
 		console.log('vai pro carrinho');
 	}
 }

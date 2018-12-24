@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.pedido.model.bean.ItemPedido;
@@ -79,9 +78,10 @@ public class ItemPedidoResource {
 	//DESCONSIDERANDO O ID DO ITEM (DEVE-SE CHEGAR E TRATAR NA VIEW P/ SEPARAR ID DO ITEM E DO PRODUTO
 	public ResponseEntity<Map<String,Object>> totaliza( @RequestBody List<ItemVO> itensVO) {
 //		List<ItemVO>itens = this.itemService.gravaItens(itensVO);
+		this.itemService.ajustaValoresTotais(itensVO);
 		BigDecimal totalCarrinho = this.itemService.totalizaItens(itensVO);
 		Map<String,Object> retorno = new HashMap<>();
-//		retorno.put("itens", itens);
+		retorno.put("itens", itensVO);
 		retorno.put("valorCarrinho", totalCarrinho);
 		return new ResponseEntity(retorno, HttpStatus.ACCEPTED);
 	}
