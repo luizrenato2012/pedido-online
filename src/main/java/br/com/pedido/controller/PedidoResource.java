@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.pedido.model.bean.ItemPedido;
+import br.com.pedido.model.bean.Pedido;
 import br.com.pedido.model.service.ItemPedidoService;
 import br.com.pedido.model.service.PedidoService;
 
@@ -18,6 +20,35 @@ public class PedidoResource {
 	
 	@Autowired
 	private ItemPedidoService itemService;
+
+	@PostMapping
+	public ResponseEntity<Map<String,Object>> adicionaItens( @RequestBody List<ItemVO> itensVO) {
+		Pedido pedido = new Pedido();
+		pedido.setDataHora(LocalDateTime.now());
+		pedido = this.pedidoService.grava(pedido);
+		
+		List<ItemPedido> itens = this.itemService.gravaItens(itensVO, pedido);
+		pedido.setItens(itens);
+		BigDecimal totalCarrinho = this.itemService.totalizaItens(itensVO);
+		Map<String,Object> retorno = new HashMap<>();
+		retorno.put("itens", itens);
+		retorno.put("valorCarrinho", totalCarrinho);
+		return new ResponseEntity(retorno, HttpStatus.ACCEPTED);
+	}
 	
+	@PostMapping
+	public ResponseEntity<Map<String,Object>> adicionaItens( @RequestBody List<ItemVO> itensVO) {
+		Pedido pedido = new Pedido();
+		pedido.setDataHora(LocalDateTime.now());
+		pedido = this.pedidoService.grava(pedido);
+		
+		List<ItemPedido> itens = this.itemService.gravaItens(itensVO, pedido);
+		pedido.setItens(itens);
+		BigDecimal totalCarrinho = this.itemService.totalizaItens(itensVO);
+		Map<String,Object> retorno = new HashMap<>();
+		retorno.put("itens", itens);
+		retorno.put("valorCarrinho", totalCarrinho);
+		return new ResponseEntity(retorno, HttpStatus.ACCEPTED);
+	}
 
 }
