@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ import br.com.pedido.model.service.ItemPedidoService;
 
 @RestController
 @RequestMapping("/api/itens")
+@CrossOrigin
 public class ItemPedidoResource {
 	
 	@Autowired
@@ -53,14 +55,21 @@ public class ItemPedidoResource {
 		return ResponseEntity.ok(item);
 	}
 	
+//	@GetMapping("/inicio")
+//	public ResponseEntity<Map<String,Object>> listaTodos() {
+//		List<ProdutoVO> listaProdutosVO = this.itemService.listaItensIniciais();
+//		BigDecimal totalProdutos = this.itemService.totalizaProdutos(listaProdutosVO);
+//		Map<String,Object> map = new HashMap<>();
+//		map.put("itens", listaProdutosVO);
+//		map.put("valorTotal", totalProdutos);
+//		return new ResponseEntity(map, HttpStatus.OK);
+//	}
+	
 	@GetMapping("/inicio")
-	public ResponseEntity<Map<String,Object>> listaTodos() {
+	public ResponseEntity<List<ProdutoVO>> listaTodos() {
 		List<ProdutoVO> listaProdutosVO = this.itemService.listaItensIniciais();
-		BigDecimal totalProdutos = this.itemService.totalizaProdutos(listaProdutosVO);
 		Map<String,Object> map = new HashMap<>();
-		map.put("itens", listaProdutosVO);
-		map.put("valorTotal", totalProdutos);
-		return new ResponseEntity(map, HttpStatus.OK);
+		return new ResponseEntity(listaProdutosVO, HttpStatus.OK);
 	}
 	
 	@GetMapping("/carrinho")
