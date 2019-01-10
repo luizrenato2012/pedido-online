@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 /**
  * VO com dados de itens que serao gravados ao incluir 
+ * usado na troca de itens a serem gravados durante a gravacao de iteins individuais
  * @author Luiz Renato
  *
  */

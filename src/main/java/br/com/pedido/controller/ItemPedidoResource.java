@@ -55,22 +55,22 @@ public class ItemPedidoResource {
 		return ResponseEntity.ok(item);
 	}
 	
-//	@GetMapping("/inicio")
-//	public ResponseEntity<Map<String,Object>> listaTodos() {
-//		List<ProdutoVO> listaProdutosVO = this.itemService.listaItensIniciais();
-//		BigDecimal totalProdutos = this.itemService.totalizaProdutos(listaProdutosVO);
-//		Map<String,Object> map = new HashMap<>();
-//		map.put("itens", listaProdutosVO);
-//		map.put("valorTotal", totalProdutos);
-//		return new ResponseEntity(map, HttpStatus.OK);
-//	}
-	
 	@GetMapping("/inicio")
-	public ResponseEntity<List<ProdutoVO>> listaTodos() {
+	public ResponseEntity<Map<String,Object>> listaTodos() {
 		List<ProdutoVO> listaProdutosVO = this.itemService.listaItensIniciais();
+		BigDecimal totalProdutos = this.itemService.totalizaProdutos(listaProdutosVO);
 		Map<String,Object> map = new HashMap<>();
-		return new ResponseEntity(listaProdutosVO, HttpStatus.OK);
+		map.put("produtos", listaProdutosVO);
+		map.put("valorTotal", totalProdutos);
+		return new ResponseEntity(map, HttpStatus.OK);
 	}
+	
+//	@GetMapping("/inicio")
+//	public ResponseEntity<List<ProdutoVO>> listaTodos() {
+//		List<ProdutoVO> listaProdutosVO = this.itemService.listaItensIniciais();
+//		Map<String,Object> map = new HashMap<>();
+//		return new ResponseEntity(listaProdutosVO, HttpStatus.OK);
+//	}
 	
 	@GetMapping("/carrinho")
 	public ResponseEntity<Map<String,Object>> listaProdutosCarrinho() {
@@ -91,7 +91,7 @@ public class ItemPedidoResource {
 		BigDecimal totalCarrinho = this.itemService.totalizaItens(itensVO);
 		Map<String,Object> retorno = new HashMap<>();
 		retorno.put("itens", itensVO);
-		retorno.put("valorCarrinho", totalCarrinho);
+		retorno.put("valorTotal", totalCarrinho);
 		return new ResponseEntity(retorno, HttpStatus.ACCEPTED);
 	}
 	
