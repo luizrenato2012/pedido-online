@@ -20,5 +20,6 @@ public interface ProdutoVO {
 	public BigDecimal getValorUnitario();
 	public Integer getQuantidade();
 	public BigDecimal getValorTotal();
+	public boolean getAtual();
 
 }

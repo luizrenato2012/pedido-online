@@ -161,11 +161,11 @@ public class ItemPedidoService {
 		return itemVO;
 	}
 	
-	public void ajustaValoresTotais(List<ItemVO> itensVO) {
-		itensVO.forEach(item -> 
-			item.setValorTotal(  
-					item.getValorUnitario().multiply( BigDecimal.valueOf(item.getQuantidade()))));
-	}
+//	public void ajustaValoresTotais(List<ItemVO> itensVO) {
+//		itensVO.forEach(item -> 
+//			item.setValorTotal(  
+//					item.getValorUnitario().multiply( BigDecimal.valueOf(item.getQuantidade()))));
+//	}
 	
 	public ItemPedido save(ItemPedido item) {
 		return this.itemRepository.save(item);
@@ -181,6 +181,13 @@ public class ItemPedidoService {
 
 	public void delete(Integer id) {
 		this.itemRepository.delete(id);
+	}
+
+	public BigDecimal totalizaItemAtual(List<ItemVO> itensVO) {
+		ItemVO itemVO = itensVO.stream().filter(item-> item.isAtual()==true)
+			.collect(Collectors.toList())
+			.get(0);
+		return itemVO.getValorUnitario().multiply(BigDecimal.valueOf(itemVO.getQuantidade()));
 	}
 
 }

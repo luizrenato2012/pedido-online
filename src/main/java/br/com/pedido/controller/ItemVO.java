@@ -32,6 +32,9 @@ public class ItemVO {
 	@JsonInclude(content=Include.NON_NULL)
 	private Integer numero;
 	
+	@JsonInclude(content=Include.NON_NULL)
+	private boolean atual;
+	
 	public ItemVO() {
 		super();
 	}
@@ -99,5 +102,14 @@ public class ItemVO {
 	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
+
+	public boolean isAtual() {
+		return atual;
+	}
+
+	public void setAtual(boolean atual) {
+		this.atual = atual;
+	}
+	
 	
 }

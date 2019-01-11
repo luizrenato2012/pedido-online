@@ -26,7 +26,8 @@ public interface ItemPedidoRepository extends JpaRepository<ItemPedido, Integer>
 				"	p.imagem  imagem,\r\n" + 
 				"	p.preco valorUnitario  ,\r\n" + 
 				"	case when  it.quantidade is not null then it.quantidade else 0 end  quantidade,\r\n" + 
-				"	case when it.valor_total is not null then it.valor_total else 0 end  valor_total \r\n" + 
+				"	case when it.valor_total is not null then it.valor_total else 0 end  valor_total, \r\n" + 
+				"   false \r\n"+
 				"from pedido.produto p\r\n" + 
 				"left join pedido.item_pedido it on it.id_produto=p.id \r\n" +
 				"left join pedido.pedido ped on it.id_pedido = ped.id \r\n"+

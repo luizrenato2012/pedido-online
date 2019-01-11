@@ -85,12 +85,14 @@ public class ItemPedidoResource {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@PostMapping("/total")
 	//DESCONSIDERANDO O ID DO ITEM (DEVE-SE CHEGAR E TRATAR NA VIEW P/ SEPARAR ID DO ITEM E DO PRODUTO
+	/** */
 	public ResponseEntity<Map<String,Object>> totaliza( @RequestBody List<ItemVO> itensVO) {
 //		List<ItemVO>itens = this.itemService.gravaItens(itensVO);
-		this.itemService.ajustaValoresTotais(itensVO);
+//		this.itemService.ajustaValoresTotais(itensVO);
+		BigDecimal totalItem =this.itemService.totalizaItemAtual(itensVO);
 		BigDecimal totalCarrinho = this.itemService.totalizaItens(itensVO);
 		Map<String,Object> retorno = new HashMap<>();
-		retorno.put("itens", itensVO);
+		retorno.put("valorTotalItem", totalItem);
 		retorno.put("valorTotal", totalCarrinho);
 		return new ResponseEntity(retorno, HttpStatus.ACCEPTED);
 	}
