@@ -35,9 +35,6 @@ public class ItemPedidoResource {
 	@Autowired
 	private ItemPedidoService itemService;
 	
-	@Autowired
-	private PedidoRepository pedidoRepository;
-	
 	private Logger log = Logger.getLogger(this.getClass().getSimpleName());
 	
 	@GetMapping("/teste")
@@ -65,13 +62,6 @@ public class ItemPedidoResource {
 		return new ResponseEntity(map, HttpStatus.OK);
 	}
 	
-//	@GetMapping("/inicio")
-//	public ResponseEntity<List<ProdutoVO>> listaTodos() {
-//		List<ProdutoVO> listaProdutosVO = this.itemService.listaItensIniciais();
-//		Map<String,Object> map = new HashMap<>();
-//		return new ResponseEntity(listaProdutosVO, HttpStatus.OK);
-//	}
-	
 	@GetMapping("/carrinho")
 	public ResponseEntity<Map<String,Object>> listaProdutosCarrinho() {
 		List<ProdutoVO> listaProdutosVO = this.itemService.listaItensCarrinho();
@@ -83,12 +73,9 @@ public class ItemPedidoResource {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@PostMapping("/total")
-	//DESCONSIDERANDO O ID DO ITEM (DEVE-SE CHEGAR E TRATAR NA VIEW P/ SEPARAR ID DO ITEM E DO PRODUTO
-	/** */
+	@PostMapping("/total_item")
+	/** DESCONSIDERANDO O ID DO ITEM (DEVE-SE CHEGAR E TRATAR NA VIEW P/ SEPARAR ID DO ITEM E DO PRODUTO */
 	public ResponseEntity<Map<String,Object>> totaliza( @RequestBody List<ItemVO> itensVO) {
-//		List<ItemVO>itens = this.itemService.gravaItens(itensVO);
-//		this.itemService.ajustaValoresTotais(itensVO);
 		BigDecimal totalItem =this.itemService.totalizaItemAtual(itensVO);
 		BigDecimal totalCarrinho = this.itemService.totalizaItens(itensVO);
 		Map<String,Object> retorno = new HashMap<>();
