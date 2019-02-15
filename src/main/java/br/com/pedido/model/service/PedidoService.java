@@ -23,26 +23,28 @@ public class PedidoService {
 	@Autowired
 	private ItemPedidoService itemPedidoService;
 	
-	public Pedido grava(Pedido pedido) {
-		return this.repositorio.save(pedido);
-	}
-	
 	@Transactional
 	public Pedido grava(List<ItemVO> itensVO) {
-		Pedido pedido = new Pedido();
-		pedido.setDataHora(LocalDateTime.now());
-		pedido = this.grava(pedido);
-		
-		List<ItemPedido> itens = itemPedidoService.converteListaVO(itensVO);
-		
-		pedido.setItens(itens);
-		BigDecimal totalCarrinho = this.itemPedidoService.totalizaItens(itensVO);
-		pedido.setValorTotal(totalCarrinho);
-		for (ItemPedido item: itens) {
-			item.setPedido(pedido);
+		try {
+			Pedido pedido = new Pedido();
+			pedido.setDataHora(LocalDateTime.now());
+			pedido = this.repositorio.save(pedido);
+
+			List<ItemPedido> itens = itemPedidoService.converteListaVO(itensVO);
+
+			pedido.setItens(itens);
+			BigDecimal totalCarrinho = this.itemPedidoService.totalizaItens(itensVO);
+			pedido.setValorTotal(totalCarrinho);
+			for (ItemPedido item: itens) {
+				item.setPedido(pedido);
+			}
+			pedido = this.repositorio.save(pedido);
+			return pedido;
+		} catch (PedidoException e ) {
+			throw e;
+		} catch (Exception e ) {
+			throw new PedidoException (e);
 		}
-		this.grava(pedido);
-		return pedido;
 	}
 
 }

@@ -128,10 +128,19 @@ public class ItemPedidoService {
 	}
 	
 	public List<ItemPedido> converteListaVO(List<ItemVO> itensVO) {
+		validaProdutoItem(itensVO);
 		List<ItemPedido> itens = itensVO.stream()
 					.map(item -> this.converteVO(item) )
 					.collect(Collectors.toList());
 		return itens;
+	}
+
+	private void validaProdutoItem(List<ItemVO> itensVO) {
+		itensVO.forEach( item -> {
+			if (item.getIdProduto()==null || item.getIdProduto()==0) {
+				throw new PedidoException("Produto invalido");
+			}
+		});
 	}
 	
 	private ItemPedido converteVO(ItemVO itemVO) {
