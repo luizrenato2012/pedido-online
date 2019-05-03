@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(schema="pedido", name="produto")
@@ -24,6 +26,8 @@ public class Produto implements Serializable{
 	
 	private Integer codigo;
 	
+	@NotNull
+	@Size(min=3, max=50)
 	private String nome;
 	
 	private String descricao;
@@ -35,6 +39,7 @@ public class Produto implements Serializable{
 //	@Lob
 	private byte [] imagem;
 	
+	@NotNull
 	private BigDecimal preco;
 	
 	private BigDecimal quantidadeEstoque;
